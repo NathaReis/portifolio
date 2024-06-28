@@ -33,7 +33,6 @@ const getCurrentClimate = async () => {
 }
 
 const render = (information) => {
-    console.log(information)
     const $image = document.querySelector("#image");
     const $temp = document.querySelector(".temp");
     const $desc = document.querySelector(".desc");
@@ -43,14 +42,16 @@ const render = (information) => {
     $temp.innerHTML = `${information.data.main.temp} C°`;
     $desc.innerHTML = String(information.data.weather[0].description).toUpperCase();
     $cep.innerHTML = `${information.dataCity.name} ${information.dataCity.country}`;
-}
 
-setInterval(() => {
-    getCurrentClimate()
-    .then(render);
-}, 60000*10)
+    setTimeout(() => {
+        getCurrentClimate()
+        .then(render);
+    }, 600000)// 10Minutos atualiza os dados
+}
+// Inicializa o dados de temperatura
 getCurrentClimate()
 .then(render);
+
 // CLOCK
 setInterval(() => {
     const $hour = document.querySelector("#hour");
