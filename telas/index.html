@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <script defer src="./main.js"></script>
+    <title>Document</title>
+</head>
+<body class="bg-gray-800 text-white">
+    <header class="bg-gray-900">
+        <div class="container mx-auto flex justify-center items-center py-4">
+            <h1 class="text-2x1 font-bold uppercase">Gravador de Tela</h1>
+        </div>
+    </header>
+
+    <main class="overflow-hidden">
+        <div class="container mx-auto py-8 px-4">
+            <h2 class="text-xl text-gray-500 uppercase font-light">
+                Gravador de Tela
+            </h2>
+
+            <video src="" autoplay class="video-feedback w-full h-auto mb-4"></video>
+
+            <div class="flex justify-center items-center -mx-4 buttons">
+                <button class="start-recording mx-4 flex-1 bg-gradient-to-br from-blue-400 to-blue-400 p-4 uppercase text-lg font-bold transition duration-300 hover:opacity-90 disabled:opacity-50">
+                    Iniciar Gravação
+                </button>
+                <button disabled class="stop-recording mx-4 flex-1 bg-gradient-to-br from-blue-400 to-blue-400 p-4 uppercase text-lg font-bold transition duration-300 hover:opacity-90 disabled:opacity-50">
+                    Parar Gravação
+                </button>
+            </div>
+
+            <div class="recorded-video-wrap hidden">
+                <h2 class="text-xl text-gray-500 uppercase font-light mb-4">
+                    Baixar seu vídeo
+                </h2>
+
+                <video src="" controls class="recorded-video bg-black w-full h-auto mb-4"></video>
+
+                <div class="flex justify-center items-center -mx-4 mb-8">
+                    <a href="" disabled class="download-video mx-4 flex-1 bg-gradient-to-br from-blue-400 to-blue-400 p-4 uppercase text-lg font-bold transition duration-300 hover:opacity-90 disabled:opacity-50">
+                        Baixar aqui
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
