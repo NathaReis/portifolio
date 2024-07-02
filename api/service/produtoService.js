@@ -40,7 +40,14 @@ const addProduto = async (produto) => {
     await writeData(data);
 };
 
+const deleteProduto = async (id) => {
+    let data = await readData();
+    data = data.produtos.filter(el => el.id != id);
+    await writeData(data);
+}
+
 module.exports = {
     getProdutos,
-    addProduto
+    addProduto,
+    deleteProduto,
 };

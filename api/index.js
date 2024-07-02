@@ -29,7 +29,20 @@ app.post("/produtos", async (req, res) => {
         res.status(201).send(novoProduto);
     }
     catch (err) {
-        console.err(err);
+        console.error(err);
+        res.status(500).send({ message: err });
+    }
+});
+
+app.get("/produtos/:id", async (req, res) => {
+    const id = req.params['id'];
+
+    try {
+        await produtosService.deleteProduto(id);
+        res.status(200).send(id);
+    }
+    catch (err) {
+        console.error(err);
         res.status(500).send({ message: err });
     }
 });

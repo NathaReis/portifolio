@@ -1,19 +1,6 @@
 {
   "produtos": [
     {
-      "name": "Caixa",
-      "valor": "34.99"
-    },
-    {
-      "name": "Sacola",
-      "valor": "09.99"
-    },
-    {
-      "id": "011c",
-      "name": "Caderno",
-      "valor": "14,99"
-    },
-    {
       "id": "051c",
       "name": "Teste",
       "valor": "14,99"
