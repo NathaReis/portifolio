@@ -1,46 +1,37 @@
-const express = require("express");
+const express = require('express');
 const app = express();
-const fs = require('fs');
-const path = require('path');
+const bodyParser = require('body-parser'); 
+const produtosService = require('./service/produtoService');
 const port = 3001;
-const filePath = path.join(__dirname, 'db.json');
 
-app.get("/", (req,res) => {
-    res.send({Message: "Olá, Seja bem vindo!"});
-})
+app.use(bodyParser.json());
 
-app.get("/produtos", (req,res) => {
-    fs.readFile(filePath, 'utf8', (err, data) => {
-        if(err) {
-            console.error(`Erro ao buscar arquivos: ${err}`);
-            res.status(400).send({message: err});
-        }
-    
-        try {
-            const jsonData = JSON.parse(data);
-            res.status(200).send(jsonData.produtos);
-        }
-        catch (parseErr) {
-            console.log(`Erro ao analisar JSON: ${parseErr}`);
-        }
-    })
-})
+app.get("/", (req, res) => {
+    res.send({ Message: "Olá, Seja bem vindo!" });
+});
 
-app.get("/pessoas", (req,res) => {
-    fs.readFile(filePath, 'utf8', (err, data) => {
-        if(err) {
-            console.error(`Erro ao buscar arquivos: ${err}`);
-            res.status(400).send({message: err});
-        }
-    
-        try {
-            const jsonData = JSON.parse(data);
-            res.status(200).send(jsonData.pessoas);
-        }
-        catch (parseErr) {
-            console.log(`Erro ao analisar JSON: ${parseErr}`);
-        }
-    })
-})
+app.get("/produtos",async (req, res) => {
+    try {
+        const produtos = await produtosService.getProdutos();
+        res.status(200).send(produtos);
+    }
+    catch (err) {
+        console.error(err);
+        res.status(400).send({ message: err });
+    }
+});
+
+app.post("/produtos", async (req, res) => {
+    const novoProduto = req.body;
+
+    try {
+        await produtosService.addProduto(novoProduto);
+        res.status(201).send(novoProduto);
+    }
+    catch (err) {
+        console.err(err);
+        res.status(500).send({ message: err });
+    }
+});
 
 app.listen(port, () => console.log(`http://localhost:${port}`));
