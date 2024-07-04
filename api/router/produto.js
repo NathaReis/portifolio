@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const produtoService = require('../service/produtoService');
+const produtoService = require('../service/produtoService');// Para utilizar o service de produto
 
 router.use((req, res, next) => {
     console.log('Horário: ', Date.now())

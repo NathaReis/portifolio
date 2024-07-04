@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
-const filePath = path.join('../api/db/produto.json');
+const filePath = path.join('../api/db/produto.json');// Para salvar registros no json
+const idService = require('./id');
 
 const readData = () => {
     return new Promise((resolve, reject) => {
@@ -15,7 +16,7 @@ const readData = () => {
             }
         })
     })
-};
+};// Leitura
 
 const writeData = (data) => {
     return new Promise((resolve, reject) => {
@@ -28,24 +29,27 @@ const writeData = (data) => {
             }
         });
     });
-};
+};// Escrita
 
 const addProduto = async (produto) => {
     const data = await readData();
+    const ids = data.produtos.map(el => el.id);
+    produto.id = idService.randomId(ids);
+    
     data.produtos.push(produto);
-    await writeData(data);
-};
+    await writeData(data.produtos);
+};// Create
 
 const getProdutos = async () => {
     const data = await readData();
     return data.produtos;
-};
+};// FindAll
 
 const getProduto = async (id) => {
     let data = await readData();
     data = data.produtos.filter(el => el.id == id);
     return data;
-};
+};// FindOne
 
 const updateProduto = async (produto) => {
     let data = await readData();
@@ -53,13 +57,13 @@ const updateProduto = async (produto) => {
     data = data.produtos.filter(el => el.id != produto.id);
     data.push(produto);
     await writeData(data);
-};
+};// Update
 
 const deleteProduto = async (id) => {
     let data = await readData();
     data = data.produtos.filter(el => el.id != id);
     await writeData(data);
-}
+}// Delete
 
 module.exports = {
     addProduto,
