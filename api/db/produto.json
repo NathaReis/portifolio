@@ -1,13 +1,18 @@
 {
   "produtos": [
     {
-      "id": "051c",
-      "name": "Teste",
+      "id": "g051c",
+      "name": "Mochila",
       "valor": "14,99"
     },
     {
-      "id": "054c",
-      "name": "Teste",
+      "id": "051gc",
+      "name": "Caderno",
+      "valor": "14,99"
+    },
+    {
+      "id": "05g1c",
+      "name": "Lápis",
       "valor": "14,99"
     }
   ]

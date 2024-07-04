@@ -19,24 +19,39 @@ const readData = () => {
 
 const writeData = (data) => {
     return new Promise((resolve, reject) => {
-      fs.writeFile(filePath, JSON.stringify(data, null, 2), (err) => {
-        if (err) {
-          reject(`Erro ao escrever no arquivo: ${err}`);
-        } else {
-          resolve();
-        }
-      });
+        data = {produtos: data};
+        fs.writeFile(filePath, JSON.stringify(data, null, 2), (err) => {
+            if (err) {
+            reject(`Erro ao escrever no arquivo: ${err}`);
+            } else {
+            resolve();
+            }
+        });
     });
+};
+
+const addProduto = async (produto) => {
+    const data = await readData();
+    data.produtos.push(produto);
+    await writeData(data);
 };
 
 const getProdutos = async () => {
     const data = await readData();
     return data.produtos;
 };
-  
-const addProduto = async (produto) => {
-    const data = await readData();
-    data.produtos.push(produto);
+
+const getProduto = async (id) => {
+    let data = await readData();
+    data = data.produtos.filter(el => el.id == id);
+    return data;
+};
+
+const updateProduto = async (produto) => {
+    let data = await readData();
+    console.log(data)
+    data = data.produtos.filter(el => el.id != produto.id);
+    data.push(produto);
     await writeData(data);
 };
 
@@ -47,7 +62,9 @@ const deleteProduto = async (id) => {
 }
 
 module.exports = {
-    getProdutos,
     addProduto,
+    getProdutos,
+    getProduto,
+    updateProduto,
     deleteProduto,
 };
