@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="assets/favicon.svg" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <title>Kings</title>
+</head>
+<body>
+    <div class="container">
+        <div class="vidro">
+            <div class="buttons">
+                <button type="button" id="relogio" class="btn" onclick="clock()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
+                        <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z"/>
+                        <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0"/>
+                    </svg>
+                </button>
+                <button type="button" id="temporizador" class="btn" onclick="temp()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-stopwatch" viewBox="0 0 16 16">
+                        <path d="M8.5 5.6a.5.5 0 1 0-1 0v2.9h-3a.5.5 0 0 0 0 1H8a.5.5 0 0 0 .5-.5z"/>
+                        <path d="M6.5 1A.5.5 0 0 1 7 .5h2a.5.5 0 0 1 0 1v.57c1.36.196 2.594.78 3.584 1.64l.012-.013.354-.354-.354-.353a.5.5 0 0 1 .707-.708l1.414 1.415a.5.5 0 1 1-.707.707l-.353-.354-.354.354-.013.012A7 7 0 1 1 7 2.071V1.5a.5.5 0 0 1-.5-.5M8 3a6 6 0 1 0 .001 12A6 6 0 0 0 8 3"/>
+                    </svg>
+                </button>
+                <label for="file" id="labelFile" class="btn">
+                    MP3
+                </label>
+                <button type="button" id="play" class="btn" onclick="validFields()">
+                    Play
+                </button>
+                <button type="button" id="save" class="btn" onclick="salvarLetra()">
+                    Salvar
+                </button>
+                <button type="button" id="delete" class="btn" onclick="">
+                    Deletar
+                </button>
+                <select id="select" onchange="fillLetter()">
+                    <option value="">Vazio</option>
+                </select>
+                <input type="file" id="file" class="hide" accept=".mp3">
+                <input type="text" id="link" class="hide">
+            </div>
+            <div id="slide" class="hide"></div>
+            <textarea id="letter" cols="30" rows="10" placeholder="Cole a letra da música aqui"></textarea>
+        </div>
+    </div>
+    <!-- Rodar áudio no fundo -->
+    <div id="video" class=""></div>
+    <audio src=""></audio>
+</body>
+</html>

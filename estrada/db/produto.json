@@ -1,0 +1,29 @@
+{
+  "produtos": [
+    {
+      "id": "g051c",
+      "name": "Mochila",
+      "valor": "14,99"
+    },
+    {
+      "id": "051gc",
+      "name": "Caderno",
+      "valor": "14,99"
+    },
+    {
+      "id": "05g1c",
+      "name": "Lápis",
+      "valor": "14,99"
+    },
+    {
+      "name": "Caneta",
+      "valor": "14,99",
+      "id": "jao0b6bkhm"
+    },
+    {
+      "name": "Borracha",
+      "valor": "14,99",
+      "id": "cvdo5morby"
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const filePath = path.join('../api/db/produto.json');// Para salvar registros no json
+const filePath = path.join('../estrada/db/produto.json');// Para salvar registros no json
 const idService = require('./id');
 
 const readData = () => {
