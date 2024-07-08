@@ -1,0 +1,98 @@
+* {
+    padding: 0;
+    margin: 0;
+    cursor: default;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+
+    background: linear-gradient(180deg, #00000000, #000000e1), url('./assets/background.jpg');
+    background-position: center;
+    background-size: cover;
+
+    display: grid;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+}
+
+#container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+
+.clock {
+    display: grid;
+    padding: 0 200px 0 200px;
+    text-align: center;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas: 
+        "hour    pontos  min"
+        "hour    time    min"
+    ;
+    color: transparent;
+    letter-spacing: 15px;
+    font-size: 30vw;
+    font-weight: 700;
+    font-family: Arial, Helvetica, sans-serif;
+    -webkit-text-stroke-width: 4px;
+    -webkit-text-stroke-color: #ddd;
+    text-shadow: 0 0 10px #0003;
+    background: none;
+}
+
+.clock span {
+    animation: ponto 1.5s infinite alternate ease-in-out;
+    grid-area: pontos;
+}
+
+#hour {
+    grid-area: hour;
+}
+
+#min {
+    grid-area: min;
+}
+
+
+#time {
+    grid-area: time;
+}
+
+@keyframes ponto {
+    from {
+        opacity: 0;
+    }
+}
+
+.climate {
+    position: absolute;
+    top: 50px;
+    right: 50px;
+
+    display: flex;
+    align-items: center;
+    font-size: 2rem;
+    font-family: sans-serif;
+    color: #ddd;
+}
+
+#time {
+    cursor: pointer;
+    padding: 5px;
+    background: #fff2;
+    text-align: center;
+    -webkit-text-stroke-width: 1px;
+    font-size: 1rem;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+}
