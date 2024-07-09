@@ -1,63 +1,6 @@
 {
   "letras": [
     {
-      "id": "g051c",
-      "titulo": "Guerra",
-      "letra": [
-        "Dentro de mim uma guerra é travada",
-        "Entre a morte e a vida",
-        "Tempestade, chuva, trovão",
-        "Lama cobre o campo",
-        "Como um manto escuro",
-        "",
-        "Dentro de mim soa o grito de muitos",
-        "De um milhão de feridos",
-        "Se engana quem ignorar",
-        "Nosso antigo início",
-        "Paz virá de um conflito",
-        "",
-        "Dentro de mim o bem e o mal",
-        "Dentro de mim o falso e o real",
-        "E eu anseio pelo final",
-        "A resolução",
-        "O fim da batalha",
-        "Da guerra",
-        "O final",
-        "",
-        "Dentro de mim anarquia e império",
-        "Transparência e mistério",
-        "No meu peito em meu coração",
-        "Oceano e deserto",
-        "Poesia e silêncio",
-        "No meu peito em meu coração",
-        "O sacro e o profano",
-        "Mil verdades e enganos",
-        "",
-        "Dentro de mim o bem e o mal",
-        "Dentro de mim o falso e o real",
-        "E eu anseio pelo final",
-        "A resolução",
-        "O fim da batalha",
-        "Da guerra",
-        "O final"
-      ]
-    },
-    {
-      "titulo": "Guerra",
-      "letra": "Guerra",
-      "id": "Arvjof1zq5"
-    },
-    {
-      "titulo": "undefined",
-      "letra": "undefined",
-      "id": "nskdttsx2s"
-    },
-    {
-      "titulo": "Guerra",
-      "letra": "",
-      "id": "Letoepzg03"
-    },
-    {
       "titulo": "Guerra",
       "letra": [
         "Dentro de mim uma guerra é travada",
@@ -96,9 +39,12 @@
         "O fim da batalha",
         "Da guerra",
         "O final",
+        "",
+        "",
+        "",
         ""
       ],
-      "id": "wdc89g6yzt"
+      "id": "g051c"
     }
   ]
 }
