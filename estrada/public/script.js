@@ -174,7 +174,9 @@ function carregarArquivo() {
 function salvarLetra() {
     if($letter.value.replace(/\s+/g, '')) {
         if($select.value) {
-            if(confirm('Deseja atualizar ' + letras[$select.value].titulo) + '?') {
+            const podeAtualizar = confirm('Deseja atualizar ' + letras[$select.value].titulo + '?') ;
+            console.log(podeAtualizar)
+            if(podeAtualizar) {
                 const dados = {
                     titulo: $letter.value.split('\n')[0],
                     letra: [...$letter.value.split('\n')].slice(1),
@@ -218,22 +220,26 @@ function salvarLetra() {
 
 function deletarLetra() {
     if($select.value) {
-        const opcoes = {
-            method: 'DELETE', 
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        };
-        fetch(`${url}letra/${letras[$select.value].id}`, opcoes)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Erro na exclusão do recurso');
-            }
-            location.reload();
-        })
-        .catch(error => {
-            console.error('Erro:', error);
-        });
+        const podeDeletar = confirm('Deseja deletar ' + letras[$select.value].titulo + '?') ;
+
+        if(podeDeletar) {
+            const opcoes = {
+                method: 'DELETE', 
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            };
+            fetch(`${url}letra/${letras[$select.value].id}`, opcoes)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro na exclusão do recurso');
+                }
+                location.reload();
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+            });
+        }
     }
 }
 
