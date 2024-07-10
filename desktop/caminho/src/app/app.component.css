@@ -1,0 +1,52 @@
+body.corpoEstilo {
+    width: 100vw;
+    height: 100dvh;
+    background: linear-gradient(180deg, transparent, #000000a4), url(./assets/arvore.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+header ul {
+    position: relative;
+    width: 100vw;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+    backdrop-filter: blur(2px);
+    list-style: none;
+    font-size: 1.2rem;
+}
+
+header a {
+    min-width: 10dvh;
+    height: 70px;
+    padding: 0 15px 0 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: #fff;
+    font-family: "Poppins", Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: 100;
+    letter-spacing: 1px;
+    transition: .5s;
+    cursor: pointer;
+}
+header a:hover {
+    background: linear-gradient(180deg, #000000a4, #000000a4), url(./assets/arvore.jpg);
+    background-attachment: fixed;
+    background-size: 100vw;
+    background-position: center;
+}
+
+header .logo {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    padding: 0 40px 0 30px;
+    border-radius: 0 35px 35px 0;
+}
