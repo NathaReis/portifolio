@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TelaService } from '../../services/tela.service';
 
 @Component({
   selector: 'app-casa',
@@ -8,7 +9,9 @@ import { Component } from '@angular/core';
   styleUrl: './casa.component.css'
 })
 export class CasaComponent {
+  constructor(readonly telaService: TelaService) {}
+
   gerarTela() {
-    window.open("http://localhost:4200/tela","_blank","toolbar=yes,location=yes,directories=no, status=no, menubar=yes,scrollbars=yes, resizable=no,copyhistory=yes, width=500px,height=500px");
+    this.telaService.gerarTela();
   }
 }
