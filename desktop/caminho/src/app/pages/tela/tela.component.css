@@ -1,6 +1,6 @@
 .tela {
     width: 100vw;
-    height: 100dvh;
+    height: calc(100dvh - 70px);
     display: flex;
     align-items: center;
     justify-content: center;
