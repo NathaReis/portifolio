@@ -1,14 +1,48 @@
+import { Tela } from './../models/Tela';
 import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TelaService {
+  listaTelas: Tela[] = [];
 
   constructor() { }
 
+  buscarTelas() {
+    return this.listaTelas;
+  }
+
+  fecharTela(id: String, numero: any) {
+    let novaLista: Tela[] = [];
+    for(let tela of this.listaTelas) {
+      if(tela.id === id && tela.numero === numero) {
+        tela.elemento.close();
+      }
+      else if (tela.numero > numero) {
+        tela.numero--;
+        novaLista.push(tela);
+      }
+    }
+    this.listaTelas = novaLista;
+    return this.listaTelas;
+  }
+
   gerarTela() {
-    window.open("../tela","_blank","toolbar=yes,location=yes,directories=no, status=no, menubar=yes,scrollbars=yes, resizable=no,copyhistory=yes, width=500px,height=500px");
+    const ids = this.listaTelas.map(element => element.id);
+    const id = ids.length > 0 ? this.idAleatorio(ids) : this.idAleatorio();
+    const numero = this.listaTelas.length + 1;
+    const elemento = window.open("../tela","_blank","toolbar=yes,location=yes,directories=no, status=no, menubar=yes,scrollbars=yes, resizable=no,copyhistory=yes, width=500px,height=500px");
+    elemento?.addEventListener("beforeunload", () => {
+      alert('Aba prestes a ser fechada');
+    });
+    const tela: Tela = {
+      id: id,
+      numero: numero,
+      elemento: elemento
+    }
+    this.listaTelas.push(tela);
+    return this.listaTelas;
   }
 
   idAleatorio(ids?: String[]) {

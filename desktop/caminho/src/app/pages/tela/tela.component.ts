@@ -14,22 +14,7 @@ export class TelaComponent implements OnInit {
 
   constructor(readonly telaService: TelaService) {}
 
-  ngOnInit(): void {
-    const telasStr = localStorage.getItem("telas");
-    if(telasStr) {
-      const id = this.telaService.idAleatorio(telasStr.split(','));
-      const novaLista = telasStr + ',' + id;
-      localStorage.setItem("telas",novaLista);
-      this.telaId = id;
-    }
-    else {
-      const id = this.telaService.idAleatorio();
-      localStorage.setItem("telas", id);
-      this.telaId = id;
-    }
-  }
-
-  gerarLista() {
-
+  ngOnInit() {
+    
   }
 }
