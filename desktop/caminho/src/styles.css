@@ -7,7 +7,7 @@
     box-sizing: border-box;
 }
 
-body.corpoEstilo {
+.corpoEstilo {
     width: 100vw;
     height: 100dvh;
     background: linear-gradient(180deg, transparent, #000000a4), url(./app/assets/arvore.jpg);
