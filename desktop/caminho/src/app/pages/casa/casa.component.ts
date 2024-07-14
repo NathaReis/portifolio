@@ -1,28 +1,39 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TelaService } from '../../services/tela.service';
 import { Tela } from '../../models/Tela';
+import { NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-casa',
   standalone: true,
-  imports: [],
+  imports: [NgFor],
   templateUrl: './casa.component.html',
   styleUrl: './casa.component.css'
 })
-export class CasaComponent {
+export class CasaComponent implements OnInit{
   telas: Tela[] = [];
 
-  constructor(readonly telaService: TelaService) {}
+  constructor(private telaService: TelaService) {}
+
+  ngOnInit() {
+    this.buscarTelas();
+  }
 
   buscarTelas() {
     this.telas = this.telaService.buscarTelas();
   }
 
-  fecharTela() {
-    this.telas = this.telaService.fecharTela('oi',1);
+  fecharTela(tela: Tela) {
+    this.telas = this.telaService.fecharTela(tela);
   }
 
   gerarTela() {
-    this.telas = this.telaService.gerarTela();
+    const result: any = this.telaService.gerarTela();
+    if(result) {
+      this.telas = result
+    }
+    else {
+      alert("Limite de telas alcançado!");
+    }
   }
 }

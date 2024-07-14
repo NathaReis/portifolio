@@ -51,9 +51,9 @@ body {
 section {
     position: absolute;
     width: 750px;
-    height: 250px;
-    bottom: 100px;
-    left: 100px;
+    height: 170px;
+    bottom: 50px;
+    left: 50px;
     background: #0003;
     border-radius: 20px;
     backdrop-filter: blur(5px);
@@ -65,7 +65,7 @@ section {
 section aside {
     position: relative;
     width: 250px;
-    height: 250px;
+    height: 170px;
     display: grid;
     place-items: center;
     font-family: "Poppins", sans-serif;
@@ -73,11 +73,11 @@ section aside {
 
 section .aba {
     position: absolute;
-    width: 150px;
+    width: 235px;
     height: 30px;
     top: -40px;
-    left: calc(235/2 - 75px);
-    border-radius: 10px;
+    left: calc(250/2 - 235/2);
+    border-radius: 0 15px 15px 15px;
     background: #eee;
     box-shadow: 0 0 5px #0002;
     display: flex;
@@ -87,6 +87,14 @@ section .aba {
 
 section .aba .numero {
     cursor: default;
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: 2px;
+}
+
+section .aba .numero .valor {
+    color: #5aa7f0;
+    margin: 10px;
 }
 
 section .aba .fechar {
@@ -116,7 +124,7 @@ section .aba .fechar:hover {
 
 section .tela {
     width: 235px;
-    height: 235px;
+    height: 155px;
     background: #eee3;
 }
 

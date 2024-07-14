@@ -10,54 +10,60 @@ export class TelaService {
   constructor() { }
 
   buscarTelas() {
+    const session = sessionStorage.getItem("telas");
+    if(session) {
+      const telas = session.split(",");
+      telas.map(numeroTela => {
+        this.listaTelas.push({numero: numeroTela});
+      })
+    }
     return this.listaTelas;
   }
 
-  fecharTela(id: String, numero: any) {
-    let novaLista: Tela[] = [];
-    for(let tela of this.listaTelas) {
-      if(tela.id === id && tela.numero === numero) {
-        tela.elemento.close();
+  fecharTela(tela: Tela) {
+    localStorage.setItem("tela", `${tela.numero},fechar`);
+    this.listaTelas = this.listaTelas.sort((a:Tela,b:Tela) => a.numero > b.numero ? 1 : -1);
+
+    let novaLista: Tela[] = this.listaTelas.filter(el => {
+        if(el.numero !== tela.numero) {
+          if(el.numero < tela.numero) {
+            return el;
+          }
+          else {
+            localStorage.setItem("tela", `${el.numero},decrementoId`);
+            el.numero--;
+            return el;
+          }
+        }
+        return
       }
-      else if (tela.numero > numero) {
-        tela.numero--;
-        novaLista.push(tela);
-      }
-    }
+    );
     this.listaTelas = novaLista;
+    this.registrarSessionStorage();
     return this.listaTelas;
   }
 
   gerarTela() {
-    const ids = this.listaTelas.map(element => element.id);
-    const id = ids.length > 0 ? this.idAleatorio(ids) : this.idAleatorio();
-    const numero = this.listaTelas.length + 1;
-    const elemento = window.open("../tela","_blank","toolbar=yes,location=yes,directories=no, status=no, menubar=yes,scrollbars=yes, resizable=no,copyhistory=yes, width=500px,height=500px");
-    elemento?.addEventListener("beforeunload", () => {
-      alert('Aba prestes a ser fechada');
-    });
-    const tela: Tela = {
-      id: id,
-      numero: numero,
-      elemento: elemento
+    if(this.listaTelas.length < 3) {
+      const numero = this.listaTelas.length + 1;
+      window.open(`../tela/${numero}`,"_blank","toolbar=yes,location=yes,directories=no, status=no, menubar=yes,scrollbars=yes, resizable=no,copyhistory=yes, width=500px,height=500px");
+      const tela: Tela = {
+        numero: numero
+      }
+      this.listaTelas.push(tela);
+      this.registrarSessionStorage();
+      return this.listaTelas;
     }
-    this.listaTelas.push(tela);
-    return this.listaTelas;
+    return false;
   }
 
-  idAleatorio(ids?: String[]) {
-    let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    let plat_id = letters.charAt(Math.floor(Math.random() * letters.length)) + (Math.random() + 1).toString(36).substr(2, 9);
-
-    if(ids) {
-        for(let id of ids) {
-            if(id == plat_id) {
-                plat_id = this.idAleatorio(ids);
-                break;
-            }
-        }
+  registrarSessionStorage() {
+    if(this.listaTelas.length > 0) {
+      const numeros = this.listaTelas.map(el => el.numero);
+      const numerosStr = numeros.join(",");
+      sessionStorage.setItem("telas", numerosStr); 
+      return;
     }
-
-    return plat_id;
+    sessionStorage.removeItem("telas");
   }
 }
