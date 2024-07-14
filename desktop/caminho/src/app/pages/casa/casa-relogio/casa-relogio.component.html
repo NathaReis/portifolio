@@ -18,10 +18,46 @@
     </header>
     <body>
       <form>
-        <mat-button-toggle-group name="tipo" id="tipo" ngModel aria-label="Font Style" (change)="selecionadoTipo()">
-          <mat-button-toggle value="relogio" class="tipoSelecionado">Relógio</mat-button-toggle>
-          <mat-button-toggle value="temporizador" class="tipoSelecionado">Tempo</mat-button-toggle>
-        </mat-button-toggle-group>        
+        <div class="mydict">
+          <div>
+            <label>
+              <input type="radio" name="tela" checked>
+              <span>Todas</span>
+            </label>
+            <label>
+              <input type="radio" name="tela">
+              <span>Tela 1</span>
+            </label>
+            <label>
+              <input type="radio" name="tela">
+              <span>Tela 2</span>
+            </label>
+            <label>
+              <input type="radio" name="tela">
+              <span>Tela 3</span>
+            </label>
+          </div>
+        </div>
+        <div id="caixaTipo">
+          <div class="mydict">
+            <div>
+              <label>
+                <input type="radio" name="tipo" checked>
+                <span>Relógio</span>
+              </label>
+              <label>
+                <input type="radio" name="tipo">
+                <span>Tempo</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="inputGroup" *ngIf="meuForm.get('tipo')">
+            <input type="number" min="0" id="minutos" name="minutos" required="" autocomplete="off">
+            <label for="minutos">Minutos</label>
+          </div>
+        </div>
+        <button class="button" type="submit">Salvar</button>
       </form>
     </body>
 </div>

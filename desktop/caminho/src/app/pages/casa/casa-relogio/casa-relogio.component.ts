@@ -6,16 +6,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrl: './casa-relogio.component.css'
 })
 export class CasaRelogioComponent implements OnInit{
-  form: FormData = new FormData();
+  meuForm: FormData = new FormData();
 
   ngOnInit() {
     const $form = document.querySelector("form");
     if($form) {
-      this.form = new FormData($form);
+      this.meuForm = new FormData($form);
     }
-  }
 
-  selecionadoTipo() {
-    console.log(this.form.getAll("tipo"));
+    $form?.addEventListener("submit", (evento) => {
+      evento.preventDefault();
+      
+    })
   }
 }

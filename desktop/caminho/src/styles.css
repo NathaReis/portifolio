@@ -17,3 +17,181 @@
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+/* Radio Button */
+/*
+<div class="mydict">
+	<div>
+		<label>
+			<input type="radio" name="radio" checked="">
+			<span>Women</span>
+		</label>
+		<label>
+			<input type="radio" name="radio">
+			<span>Men</span>
+		</label>
+		<label>
+			<input type="radio" name="radio">
+			<span>Divided</span>
+		</label>
+		
+	</div>
+</div>
+*/
+:focus {
+    outline: 0;
+    border-color: #2260ff;
+    box-shadow: 0 0 0 4px #b5c9fc;
+}
+  
+.mydict div {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+    justify-content: center;
+}
+  
+.mydict input[type="radio"] {
+    clip: rect(0 0 0 0);
+    clip-path: inset(100%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+}
+  
+.mydict input[type="radio"]:checked + span {
+    box-shadow: 0 0 0 0.0625em #0043ed;
+    background-color: #dee7ff;
+    z-index: 1;
+    color: #0043ed;
+}
+  
+label span {
+    display: block;
+    cursor: pointer;
+    background-color: #fff;
+    padding: 0.375em .75em;
+    position: relative;
+    margin-left: .0625em;
+    box-shadow: 0 0 0 0.0625em #b5bfd9;
+    letter-spacing: .05em;
+    color: #3e4963;
+    text-align: center;
+    transition: background-color .5s ease;
+}
+  
+label:first-child span {
+    border-radius: .375em 0 0 .375em;
+}
+  
+label:last-child span {
+    border-radius: 0 .375em .375em 0;
+}
+
+/* Button */
+/*
+<button class="button"> Button
+</button>
+*/
+.button {
+    --color: #00A97F;
+    padding: 0.8em 1.7em;
+    background-color: transparent;
+    border-radius: .3em;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: .5s;
+    font-weight: 400;
+    font-size: 17px;
+    border: 1px solid;
+    font-family: inherit;
+    text-transform: uppercase;
+    color: var(--color);
+    z-index: 1;
+}
+   
+.button::before, .button::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 50px;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    border-radius: 50%;
+    z-index: -1;
+    background-color: var(--color);
+    transition: 1s ease;
+}
+   
+.button::before {
+    top: -1em;
+    left: -1em;
+}
+   
+.button::after {
+    left: calc(100% + 1em);
+    top: calc(100% + 1em);
+}
+   
+.button:hover::before, .button:hover::after {
+    height: 410px;
+    width: 410px;
+}
+   
+.button:hover {
+    color: rgb(10, 25, 30);
+}
+   
+.button:active {
+    filter: brightness(.8);
+}
+
+/* Input */
+/*
+<div class="inputGroup">
+    <input type="text" required="" autocomplete="off">
+    <label for="name">Name</label>
+</div>
+*/
+.inputGroup {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 1em 0 1em 0;
+    position: relative;
+}
+  
+.inputGroup input {
+    font-size: 100%;
+    padding: 0.8em;
+    outline: none;
+    border: 2px solid rgb(200, 200, 200);
+    background-color: transparent;
+    border-radius: 20px;
+    width: 100%;
+}
+  
+.inputGroup label {
+    font-size: 100%;
+    position: absolute;
+    left: 0;
+    padding: 0.8em;
+    margin-left: 0.5em;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    color: rgb(100, 100, 100);
+}
+  
+.inputGroup :is(input:focus, input:valid)~label {
+    transform: translateY(-50%) scale(.9);
+    margin: 0em;
+    margin-left: 1.3em;
+    padding: 0.4em;
+    color: #000;
+}
+  
+.inputGroup :is(input:focus, input:valid) {
+    border-color: rgb(150, 150, 200);
+}

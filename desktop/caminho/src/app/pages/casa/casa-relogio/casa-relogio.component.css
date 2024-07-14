@@ -61,19 +61,9 @@ form {
     justify-content: center;
 }
 
-form #tipo {
-    border-radius: 15px;
-    height: 40px;
-    width: 300px;
+.caixaTipo {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-}
-
-form .tipoSelecionado{
-    width: 145px;
-    height: 40px;
-    display: grid;
+    justify-content: center;
     place-items: center;
-    background: gray;
 }
