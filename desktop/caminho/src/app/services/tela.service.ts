@@ -12,6 +12,7 @@ export class TelaService {
   buscarTelas() {
     const session = sessionStorage.getItem("telas");
     if(session) {
+      this.listaTelas = [];
       const telas = session.split(",");
       telas.map(numeroTela => {
         this.listaTelas.push({numero: numeroTela});

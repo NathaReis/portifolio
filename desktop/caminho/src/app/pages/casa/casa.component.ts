@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { TelaService } from '../../services/tela.service';
 import { Tela } from '../../models/Tela';
-import { NgFor } from '@angular/common';
+import { CasaModule } from './casa.module';
 
 @Component({
   selector: 'app-casa',
-  standalone: true,
-  imports: [NgFor],
   templateUrl: './casa.component.html',
   styleUrl: './casa.component.css'
 })
