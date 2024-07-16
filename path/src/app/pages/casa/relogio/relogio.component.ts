@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Tela } from 'src/app/models/Tela';
+import { TelaService } from 'src/app/services/tela.service';
 
 @Component({
   selector: 'app-relogio',
@@ -7,16 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RelogioComponent implements OnInit {
   meuForm: FormData = new FormData();
+  telaSelecionada = 'Todas';
+  tipoSelecionado = 'Relogio';
+  minutos = '';
+  telas: Tela[] = [];
+
+  constructor(private telaService: TelaService) { }
 
   ngOnInit() {
-    const $form = document.querySelector("form");
-    if($form) {
-      this.meuForm = new FormData($form);
-    }
+    this.telas = this.telaService.buscarTelas();
+  }
 
-    $form?.addEventListener("submit", (evento) => {
-      evento.preventDefault();
-      
-    })
+  onSubmit(form: any) {
+    if (form.valid) {
+      console.log('Form data is valid:', form.value);
+    }
   }
 }

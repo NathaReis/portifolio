@@ -17,24 +17,16 @@
       </nav>
     </header>
     <body>
-      <form>
+      <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
         <div class="mydict">
           <div>
-            <label>
-              <input type="radio" name="tela" checked>
+            <label *ngIf="telas.length > 0">
+              <input type="radio" name="tela" [(ngModel)]="telaSelecionada" value="Todas" checked required>
               <span>Todas</span>
             </label>
-            <label>
-              <input type="radio" name="tela">
-              <span>Tela 1</span>
-            </label>
-            <label>
-              <input type="radio" name="tela">
-              <span>Tela 2</span>
-            </label>
-            <label>
-              <input type="radio" name="tela">
-              <span>Tela 3</span>
+            <label *ngFor="let tela of telas">
+              <input type="radio" name="tela" [(ngModel)]="telaSelecionada" value="Tela{{tela.numero}}" required>
+              <span>Tela {{ tela.numero }}</span>
             </label>
           </div>
         </div>
@@ -42,22 +34,22 @@
           <div class="mydict">
             <div>
               <label>
-                <input type="radio" name="tipo" checked>
+                <input type="radio" name="tipo" [(ngModel)]="tipoSelecionado" value="Relogio" checked required>
                 <span>Relógio</span>
               </label>
               <label>
-                <input type="radio" name="tipo">
+                <input type="radio" name="tipo" [(ngModel)]="tipoSelecionado" value="Tempo" required>
                 <span>Tempo</span>
               </label>
             </div>
           </div>
 
-          <div class="inputGroup" *ngIf="meuForm.get('tipo')">
-            <input type="number" min="0" id="minutos" name="minutos" required="" autocomplete="off">
+          <div class="inputGroup" *ngIf="tipoSelecionado === 'Tempo'">
+            <input type="number" min="0" id="minutos" name="minutos" required autocomplete="off" [(ngModel)]="minutos">
             <label for="minutos">Minutos</label>
           </div>
         </div>
-        <button class="button" type="submit">Salvar</button>
+        <button class="button" type="submit" [disabled]="myForm.invalid">Enviar</button>
       </form>
     </body>
 </div>

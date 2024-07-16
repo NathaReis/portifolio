@@ -8,6 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class TelaComponent implements OnInit {
   id: string = '';
+  telaUrl: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -15,6 +16,8 @@ export class TelaComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.telaUrl = this.router.url.slice(0,-1);
+
     this.route.params.subscribe((params: any) => {
       this.id = String(params["id"]);
     });// Busca id
@@ -34,7 +37,8 @@ export class TelaComponent implements OnInit {
           window.close();
           break
         case 'decrementoId':
-          this.router.navigate([`tela/${+this.id - 1}`]);
+          const novoId = +this.id - 1;
+          this.router.navigate([`${this.telaUrl}${novoId}`]);
         break
       }
       localStorage.removeItem("tela");
