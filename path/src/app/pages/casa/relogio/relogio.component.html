@@ -18,37 +18,19 @@
     </header>
     <body>
       <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
-        <div class="mydict">
-          <div>
-            <label *ngIf="telas.length > 0">
-              <input type="radio" name="tela" [(ngModel)]="telaSelecionada" value="Todas" checked required>
-              <span>Todas</span>
-            </label>
-            <label *ngFor="let tela of telas">
-              <input type="radio" name="tela" [(ngModel)]="telaSelecionada" value="Tela{{tela.numero}}" required>
-              <span>Tela {{ tela.numero }}</span>
-            </label>
-          </div>
-        </div>
-        <div id="caixaTipo">
-          <div class="mydict">
-            <div>
-              <label>
-                <input type="radio" name="tipo" [(ngModel)]="tipoSelecionado" value="Relogio" checked required>
-                <span>Relógio</span>
-              </label>
-              <label>
-                <input type="radio" name="tipo" [(ngModel)]="tipoSelecionado" value="Tempo" required>
-                <span>Tempo</span>
-              </label>
-            </div>
-          </div>
+        <mat-button-toggle-group class="buttonToggleBox" *ngIf="telas.length > 0" name="tela" [(ngModel)]="telaSelecionada" aria-label="Font Style">
+          <mat-button-toggle value="todas" checked>Todas</mat-button-toggle>
+          <mat-button-toggle *ngFor="let tela of telas" value="{{tela.numero}}">Tela {{tela.numero}}</mat-button-toggle>
+        </mat-button-toggle-group>        
+        <mat-button-toggle-group class="buttonToggleBox" name="tipo" [(ngModel)]="tipoSelecionado" aria-label="Font Style">
+          <mat-button-toggle value="relogio">Relógio</mat-button-toggle>
+          <mat-button-toggle value="tempo">Tempo</mat-button-toggle>
+        </mat-button-toggle-group>  
 
-          <div class="inputGroup" *ngIf="tipoSelecionado === 'Tempo'">
-            <input type="number" min="0" id="minutos" name="minutos" required autocomplete="off" [(ngModel)]="minutos">
-            <label for="minutos">Minutos</label>
-          </div>
-        </div>
+        <mat-form-field *ngIf="tipoSelecionado === 'tempo'">
+          <mat-label>Tempo</mat-label>
+          <input matInput id="minutos" type="time" placeholder="Ex. hh:mm" name="minutos" [(ngModel)]="minutos" required>
+        </mat-form-field>
         <button class="button" type="submit" [disabled]="myForm.invalid">Enviar</button>
       </form>
     </body>

@@ -9,8 +9,8 @@ import { TelaService } from 'src/app/services/tela.service';
 })
 export class RelogioComponent implements OnInit {
   meuForm: FormData = new FormData();
-  telaSelecionada = 'Todas';
-  tipoSelecionado = 'Relogio';
+  telaSelecionada = 'todas';
+  tipoSelecionado = 'relogio';
   minutos = '';
   telas: Tela[] = [];
 
