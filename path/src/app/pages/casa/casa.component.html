@@ -21,7 +21,9 @@
         <aside *ngFor="let tela of telas">
           <nav class="aba">
             <h3 class="numero">Tela <i class="valor">{{ tela.numero }}</i></h3>
-            <p class="fechar" (click)="fecharTela(tela)">X</p>
+            <div class="caixaFechar">
+              <p class="fechar" (click)="fecharTela(tela)">X</p>
+            </div>
           </nav>
           <div class="tela"></div>
         </aside>
