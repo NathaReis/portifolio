@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TelaService } from 'src/app/services/tela.service';
 
 @Component({
   selector: 'app-tela',
@@ -12,7 +13,8 @@ export class TelaComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private telaService: TelaService
   ) { }
 
   ngOnInit() {
@@ -25,23 +27,8 @@ export class TelaComponent implements OnInit {
     window.addEventListener("storage", (event) => {
       if (event.key === "tela") {
         const resultado = event.newValue?.split(",");
-        this.validarResultado(resultado);
+        this.telaService.eventosLocalStorage(resultado, this.id, this.telaUrl, this.router);
       }
     });// Busca localStorage
   }
-
-  validarResultado(resultado: any) {
-    if(resultado[0] == this.id) {
-      switch(resultado[1]) {
-        case 'fechar':
-          window.close();
-          break
-        case 'decrementoId':
-          const novoId = +this.id - 1;
-          this.router.navigate([`${this.telaUrl}${novoId}`]);
-        break
-      }
-      localStorage.removeItem("tela");
-    }
-  }// Valida o localStorage
 }

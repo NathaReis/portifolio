@@ -17,15 +17,15 @@ export class CasaComponent implements OnInit {
   }
 
   buscarTelas() {
-    this.telas = this.telaService.buscarTelas();
+    this.telas = this.telaService.buscar();
   }
 
   fecharTela(tela: Tela) {
-    this.telas = this.telaService.fecharTela(tela);
+    this.telas = this.telaService.fechar(tela);
   }
 
   gerarTela() {
-    const result: any = this.telaService.gerarTela();
+    const result: any = this.telaService.gerar();
     if(result) {
       this.telas = result
     }

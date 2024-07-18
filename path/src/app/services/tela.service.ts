@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { Tela } from '../models/Tela';
 
 @Injectable({
@@ -9,7 +11,7 @@ export class TelaService {
 
   constructor() { }
 
-  buscarTelas() {
+  buscar() {
     const session = sessionStorage.getItem("telas");
     if(session) {
       this.listaTelas = [];
@@ -21,7 +23,7 @@ export class TelaService {
     return this.listaTelas;
   }
 
-  fecharTela(tela: Tela) {
+  fechar(tela: Tela) {
     localStorage.setItem("tela", `${tela.numero},fechar`);
     this.listaTelas = this.listaTelas.sort((a:Tela,b:Tela) => a.numero > b.numero ? 1 : -1);
 
@@ -44,7 +46,7 @@ export class TelaService {
     return this.listaTelas;
   }
 
-  gerarTela() {
+  gerar() {
     if(this.listaTelas.length < 3) {
       const numero = this.listaTelas.length + 1;
       window.open(`../tela/${numero}`,"_blank","toolbar=yes,location=yes,directories=no, status=no, menubar=yes,scrollbars=yes, resizable=no,copyhistory=yes, width=500px,height=500px");
@@ -58,6 +60,13 @@ export class TelaService {
     return false;
   }
 
+  navegar(rota: string, telas: string[]) {
+    telas.map((tela: string) => {
+      const rotaUrl = `tela/${rota}/${tela}`;
+      localStorage.setItem("tela", `${tela},rota,${rotaUrl}`);
+    })
+  }
+
   registrarSessionStorage() {
     if(this.listaTelas.length > 0) {
       const numeros = this.listaTelas.map(el => el.numero);
@@ -67,4 +76,23 @@ export class TelaService {
     }
     sessionStorage.removeItem("telas");
   }
+
+  eventosLocalStorage(resultado: any, id: string, telaUrl: string, router: Router) {
+    if(resultado[0] == id) {
+      switch(resultado[1]) {
+        case 'fechar':
+          window.close();
+          break
+        case 'decrementoId':
+          const novoId = +id - 1;
+          router.navigate([`${telaUrl}${novoId}`]);
+          break
+        case 'rota':
+          const rotaUrl = resultado[2];
+          router.navigate([`${rotaUrl}`]);
+        break
+      }
+      localStorage.removeItem("tela");
+    }
+  }// Valida o localStorage
 }

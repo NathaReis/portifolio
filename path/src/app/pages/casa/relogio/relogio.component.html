@@ -18,11 +18,11 @@
     </header>
     <body>
       <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
-        <mat-button-toggle-group class="buttonToggleBox" *ngIf="telas.length > 0" name="tela" [(ngModel)]="telaSelecionada" aria-label="Font Style">
-          <mat-button-toggle value="todas" checked>Todas</mat-button-toggle>
-          <mat-button-toggle *ngFor="let tela of telas" value="{{tela.numero}}">Tela {{tela.numero}}</mat-button-toggle>
+        <mat-button-toggle-group *ngIf="telas.length > 0" class="buttonToggleBox"  name="telas" [(ngModel)]="telaSelecionada" multiple required aria-label="Font Style">
+          <mat-button-toggle value="todas" (click)="toggleTodasTelas(true)">Todas</mat-button-toggle>
+          <mat-button-toggle *ngFor="let tela of telas" value="{{tela.numero}}" (click)="toggleTodasTelas(false)">Tela {{tela.numero}}</mat-button-toggle>
         </mat-button-toggle-group>        
-        <mat-button-toggle-group class="buttonToggleBox" name="tipo" [(ngModel)]="tipoSelecionado" aria-label="Font Style">
+        <mat-button-toggle-group class="buttonToggleBox" name="tipo" [(ngModel)]="tipoSelecionado" required aria-label="Font Style">
           <mat-button-toggle value="relogio">Relógio</mat-button-toggle>
           <mat-button-toggle value="tempo">Tempo</mat-button-toggle>
         </mat-button-toggle-group>  
