@@ -1,6 +1,6 @@
 .corpoEstilo {
     position: relative;
-    background: linear-gradient(180deg, transparent, #000000a4), url(../../../assets/floresta.jpg);
+    background: var(--backgroundTela);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

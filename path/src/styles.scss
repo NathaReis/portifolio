@@ -4,6 +4,14 @@
 
 :root {
     --background: linear-gradient(180deg, #000000a4, #000000a4), url(./app/assets/folhas.jpg);
+    --backgroundTela: linear-gradient(180deg, transparent, #000000a4), url(./app/assets/floresta.jpg)
+}
+
+@media (max-width: 1200px) {
+    :root {
+        --background: linear-gradient(180deg, #000000a4, #000000a4), url(./app/assets/folhas1200x800.jpg);
+        --backgroundTela: linear-gradient(180deg, transparent, #000000a4), url(./app/assets/floresta1200x800.jpg)
+    }
 }
 
 * {

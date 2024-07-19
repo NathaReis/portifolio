@@ -94,7 +94,8 @@ export class TelaService {
       sessionStorage.setItem("rotas", rotasStr); 
       return;
     }
-    sessionStorage.removeItem("telas");
+    sessionStorage.removeItem("numeros");
+    sessionStorage.removeItem("rotas");
   }
 
   eventosLocalStorage(resultado: any, id: string, telaUrl: string, router: Router) {
