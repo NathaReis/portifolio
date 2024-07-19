@@ -35,13 +35,17 @@ section .aba {
 }
 
 section .aba .numero {
-    cursor: default;
+    cursor: pointer;
     font-weight: 500;
     letter-spacing: 2px;
 }
 
 section .aba .numero .valor {
     color: #5aa7f0;
+}
+
+section .aba .numero:hover {
+    opacity: .8;
 }
 
 section .aba .caixaFechar {
@@ -87,6 +91,12 @@ section .tela {
     width: 235px;
     height: 155px;
     background: #eee3;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: #fff;
+    text-transform: uppercase;
 }
 
 section:nth-child(1) .tela {

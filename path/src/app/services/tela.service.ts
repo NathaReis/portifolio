@@ -12,13 +12,21 @@ export class TelaService {
   constructor() { }
 
   buscar() {
-    const session = sessionStorage.getItem("telas");
-    if(session) {
+    const sessionNumeros = sessionStorage.getItem("numeros");
+    const sessionRotas = sessionStorage.getItem("rotas");
+
+    if(sessionNumeros && sessionRotas) {
       this.listaTelas = [];
-      const telas = session.split(",");
-      telas.map(numeroTela => {
-        this.listaTelas.push({numero: numeroTela});
-      })
+      const numeros = sessionNumeros.split(",");
+      const rotas = sessionRotas.split(",");
+
+      for(let posicao in numeros) {
+        this.listaTelas.push({
+          numero: numeros[posicao],
+          rota: rotas[posicao]
+        });
+      }
+
     }
     return this.listaTelas;
   }
@@ -51,7 +59,8 @@ export class TelaService {
       const numero = this.listaTelas.length + 1;
       window.open(`../tela/${numero}`,"_blank","toolbar=yes,location=yes,directories=no, status=no, menubar=yes,scrollbars=yes, resizable=no,copyhistory=yes, width=500px,height=500px");
       const tela: Tela = {
-        numero: numero
+        numero: numero,
+        rota: 'tela',
       }
       this.listaTelas.push(tela);
       this.registrarSessionStorage();
@@ -61,17 +70,28 @@ export class TelaService {
   }
 
   navegar(rota: string, telas: string[]) {
-    telas.map((tela: string) => {
-      const rotaUrl = `tela/${rota}/${tela}`;
-      localStorage.setItem("tela", `${tela},rota,${rotaUrl}`);
+    telas.map((numeroTela: string) => {
+      this.listaTelas.map((tela: Tela) => {
+        if(tela.numero == numeroTela) {
+          tela.rota = rota;
+        }
+      })
+      const rotaUrl = rota === 'tela' ? `tela/${numeroTela}` : `tela/${rota}/${numeroTela}`;
+      localStorage.setItem("tela", `${numeroTela},${rotaUrl}`);
     })
+    this.registrarSessionStorage();
   }
 
   registrarSessionStorage() {
     if(this.listaTelas.length > 0) {
       const numeros = this.listaTelas.map(el => el.numero);
+      const rotas = this.listaTelas.map(el => el.rota);
+
       const numerosStr = numeros.join(",");
-      sessionStorage.setItem("telas", numerosStr); 
+      const rotasStr = rotas.join(",");
+
+      sessionStorage.setItem("numeros", numerosStr); 
+      sessionStorage.setItem("rotas", rotasStr); 
       return;
     }
     sessionStorage.removeItem("telas");
@@ -87,10 +107,9 @@ export class TelaService {
           const novoId = +id - 1;
           router.navigate([`${telaUrl}${novoId}`]);
           break
-        case 'rota':
-          const rotaUrl = resultado[2];
+        default:
+          const rotaUrl = resultado[1];
           router.navigate([`${rotaUrl}`]);
-        break
       }
       localStorage.removeItem("tela");
     }

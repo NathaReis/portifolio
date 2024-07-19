@@ -20,12 +20,14 @@
       <section>
         <aside *ngFor="let tela of telas">
           <nav class="aba">
-            <h3 class="numero">Tela <i class="valor">{{ tela.numero }}</i></h3>
+            <h3 class="numero" (click)="voltarTela(tela)">Tela <i class="valor">{{ tela.numero }}</i></h3>
             <div class="caixaFechar">
               <p class="fechar" (click)="fecharTela(tela)">X</p>
             </div>
           </nav>
-          <div class="tela"></div>
+          <div class="tela">
+            {{ tela.rota }}
+          </div>
         </aside>
       </section>
     </body>

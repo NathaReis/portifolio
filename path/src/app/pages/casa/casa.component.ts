@@ -24,6 +24,10 @@ export class CasaComponent implements OnInit {
     this.telas = this.telaService.fechar(tela);
   }
 
+  voltarTela(tela: Tela) {
+    this.telaService.navegar('tela',[tela.numero]);
+  }
+
   gerarTela() {
     const result: any = this.telaService.gerar();
     if(result) {
