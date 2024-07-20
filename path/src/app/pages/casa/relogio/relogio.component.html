@@ -1,37 +1,33 @@
 <div class="corpoEstilo">
-    <header>
-      <nav>
-        <ul>
-          <li>
-            <a class="logo" routerLink="/casa">Sonoplastia</a> 
-          </li>
-          <li>
-            <a routerLink="./">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
-                <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z"/>
-                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0"/>
-              </svg>
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </header>
-    <body>
-      <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
-        <mat-button-toggle-group *ngIf="telas.length > 0" class="buttonToggleBox"  name="telas" [(ngModel)]="telaSelecionada" multiple required aria-label="Font Style">
-          <mat-button-toggle value="todas" (click)="toggleTodasTelas(true)">Todas</mat-button-toggle>
-          <mat-button-toggle *ngFor="let tela of telas" value="{{tela.numero}}" (click)="toggleTodasTelas(false)">Tela {{tela.numero}}</mat-button-toggle>
-        </mat-button-toggle-group>        
-        <mat-button-toggle-group class="buttonToggleBox" name="tipo" [(ngModel)]="tipoSelecionado" required aria-label="Font Style">
-          <mat-button-toggle value="relogio">Relógio</mat-button-toggle>
-          <mat-button-toggle value="tempo">Tempo</mat-button-toggle>
-        </mat-button-toggle-group>  
+  <header>
+    <nav>
+      <ul>
+        <li *ngFor="let item of buscarHeader()">
+          <a routerLink="{{item.rota}}" ngClass="{{item.class}}">
+            <mat-icon>
+              {{item.icon}}
+            </mat-icon>
+          </a> 
+        </li>
+      </ul>
+    </nav>
+  </header>    
+  <body>
+    <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
+      <mat-button-toggle-group *ngIf="telas.length > 0" class="buttonToggleBox"  name="telas" [(ngModel)]="telaSelecionada" multiple required aria-label="Font Style">
+        <mat-button-toggle value="todas" (click)="toggleTodasTelas(true)">Todas</mat-button-toggle>
+        <mat-button-toggle *ngFor="let tela of telas" value="{{tela.numero}}" (click)="toggleTodasTelas(false)">Tela {{tela.numero}}</mat-button-toggle>
+      </mat-button-toggle-group>        
+      <mat-button-toggle-group class="buttonToggleBox" name="tipo" [(ngModel)]="tipoSelecionado" required aria-label="Font Style">
+        <mat-button-toggle value="relogio">Relógio</mat-button-toggle>
+        <mat-button-toggle value="tempo">Tempo</mat-button-toggle>
+      </mat-button-toggle-group>  
 
-        <mat-form-field *ngIf="tipoSelecionado === 'tempo'">
-          <mat-label>Tempo</mat-label>
-          <input matInput id="minutos" type="time" placeholder="Ex. hh:mm" name="minutos" [(ngModel)]="minutos" required>
-        </mat-form-field>
-        <button class="button" type="submit" [disabled]="myForm.invalid">Enviar</button>
-      </form>
-    </body>
+      <mat-form-field *ngIf="tipoSelecionado === 'tempo'">
+        <mat-label>Tempo</mat-label>
+        <input matInput id="minutos" type="time" placeholder="Ex. hh:mm" name="minutos" [(ngModel)]="minutos" required>
+      </mat-form-field>
+      <button class="button" type="submit" [disabled]="myForm.invalid">Enviar</button>
+    </form>
+  </body>
 </div>

@@ -20,7 +20,7 @@ import { TelaComponent } from './pages/tela/tela.component';
     CasaComponent,
     RelogioComponent,
     TelaComponent,
-    TelaRelogioComponent
+    TelaRelogioComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,7 +30,7 @@ import { TelaComponent } from './pages/tela/tela.component';
     MatButtonToggleModule,
     MatInputModule,
     MatFormFieldModule,
-    MatIconModule
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

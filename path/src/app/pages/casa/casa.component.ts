@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Header } from 'src/app/models/Header';
 import { Tela } from 'src/app/models/Tela';
+import { HeaderService } from 'src/app/services/header.service';
 import { TelaService } from 'src/app/services/tela.service';
 
 @Component({
@@ -9,29 +11,45 @@ import { TelaService } from 'src/app/services/tela.service';
 })
 export class CasaComponent implements OnInit {
   telas: Tela[] = [];
+  adicionarClass: string = '';
 
-  constructor(private telaService: TelaService) {}
+  constructor(
+    private telaService: TelaService,
+    private headerService: HeaderService
+  ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.buscarTelas();
+    this.configurarAdicionarClass();
   }
 
-  buscarTelas() {
+  configurarAdicionarClass() {
+    const classe = `primeiro${this.telas.length}`;
+    this.adicionarClass = classe;
+  }
+
+  buscarHeader(): Header[] {
+    return this.headerService.buscarHeader();
+  }
+
+  buscarTelas(): void {
     this.telas = this.telaService.buscar();
   }
 
-  fecharTela(tela: Tela) {
+  fecharTela(tela: Tela): void {
     this.telas = this.telaService.fechar(tela);
+    this.configurarAdicionarClass();
   }
 
-  voltarTela(tela: Tela) {
+  voltarTela(tela: Tela): void {
     this.telaService.navegar('tela',[tela.numero]);
   }
 
-  gerarTela() {
+  gerarTela(): void {
     const result: any = this.telaService.gerar();
     if(result) {
       this.telas = result
+      this.configurarAdicionarClass();
     }
     else {
       alert("Limite de telas alcançado!");

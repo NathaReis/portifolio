@@ -74,6 +74,10 @@ header .logo {
     border-radius: 0 35px 35px 0;
 }
 
+header .logo:hover {
+    border-right: .8px solid #0d0d0d;
+}
+
 body {
     position: relative;
     width: 100vw;

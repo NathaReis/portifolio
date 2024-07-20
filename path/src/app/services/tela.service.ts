@@ -1,3 +1,4 @@
+import { IconeRotaService } from './icone-rota.service';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -9,7 +10,7 @@ import { Tela } from '../models/Tela';
 export class TelaService {
   listaTelas: Tela[] = [];
 
-  constructor() { }
+  constructor(readonly iconeRotaService: IconeRotaService) { }
 
   buscar() {
     const sessionNumeros = sessionStorage.getItem("numeros");
@@ -60,7 +61,7 @@ export class TelaService {
       window.open(`../tela/${numero}`,"_blank","toolbar=yes,location=yes,directories=no, status=no, menubar=yes,scrollbars=yes, resizable=no,copyhistory=yes, width=500px,height=500px");
       const tela: Tela = {
         numero: numero,
-        rota: 'tela',
+        rota: this.iconeRotaService.iconeRota('tela'),
       }
       this.listaTelas.push(tela);
       this.registrarSessionStorage();
@@ -69,11 +70,15 @@ export class TelaService {
     return false;
   }
 
+  gerarTelaEspecifica(rota: string) {
+    window.open(`../tela/${rota}/local`,"_blank","toolbar=yes,location=yes,directories=no, status=no, menubar=yes,scrollbars=yes, resizable=no,copyhistory=yes, width=500px,height=500px");
+  }
+
   navegar(rota: string, telas: string[]) {
     telas.map((numeroTela: string) => {
       this.listaTelas.map((tela: Tela) => {
         if(tela.numero == numeroTela) {
-          tela.rota = rota;
+          tela.rota = this.iconeRotaService.iconeRota(rota);
         }
       })
       const rotaUrl = rota === 'tela' ? `tela/${numeroTela}` : `tela/${rota}/${numeroTela}`;
