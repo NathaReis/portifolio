@@ -16,6 +16,7 @@ import { TelaComponent } from './pages/tela/tela.component';
 import { HeaderComponent } from './templates/header/header.component';
 import { ContainerComponent } from './templates/container/container.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { TelaTempoComponent } from './pages/tela/tela-tempo/tela-tempo.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
     HeaderComponent,
     ContainerComponent,
     NotFoundComponent,
+    TelaTempoComponent,
   ],
   imports: [
     BrowserModule,

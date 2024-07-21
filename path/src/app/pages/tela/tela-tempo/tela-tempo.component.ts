@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import { TelaService } from 'src/app/services/tela.service';
 import { Cidade } from 'src/app/models/Cidade';
 import { Clima } from 'src/app/models/Clima';
-import { TelaService } from 'src/app/services/tela.service';
 
 @Component({
-  selector: 'app-tela-relogio',
-  templateUrl: './tela-relogio.component.html',
-  styleUrls: ['./tela-relogio.component.scss']
+  selector: 'app-tela-tempo',
+  templateUrl: './tela-tempo.component.html',
+  styleUrls: ['./tela-tempo.component.scss']
 })
-export class TelaRelogioComponent implements OnInit {
+export class TelaTempoComponent implements OnInit {
   id: string = '';
   telaUrl: string = '';
 
@@ -19,6 +19,7 @@ export class TelaRelogioComponent implements OnInit {
   clima: Clima = {src: '', cep: '', temperatura: '', descricao: ''};
   hora: string = '00';
   minuto: string = '00';
+  segundo: number = 59;
 
   constructor(
     private route: ActivatedRoute,
@@ -34,12 +35,17 @@ export class TelaRelogioComponent implements OnInit {
     });// Busca id
 
     window.addEventListener("storage", (event) => {
-      if(event.key === "tela") {
-        const resultado = event.newValue?.split(",");
-        this.telaService.eventosLocalStorage(resultado, this.id, this.telaUrl, this.router);
+      const resultado = event.newValue?.split(",");
+      switch(event.key) {
+        case 'tela':
+          this.telaService.eventosLocalStorage(resultado, this.id, this.telaUrl, this.router);
+          break 
+        case 'tempo':
+          this.buscarHorario(resultado);
+          break
       }
     });// Busca localStorage
-    this.buscarHorario();
+
     this.formatarInformacaoClima();
   }
 
@@ -91,11 +97,25 @@ export class TelaRelogioComponent implements OnInit {
     return hora < 10 ? `0${hora}` : `${hora}`;
   }
 
-  buscarHorario() {
-    setInterval(() => {
-      const agora = new Date();
-      this.hora = this.formatarHora(agora.getHours());
-      this.minuto = this.formatarHora(agora.getMinutes());
-    }, 1000); // 1 minuto
+  buscarHorario(resultado: any) {
+    if(resultado.includes(this.id)) {
+      const posHorario = +resultado.length - 1;
+      const horario = resultado[posHorario].split(":");
+      this.hora = this.formatarHora(+horario[0]);
+      this.minuto = this.formatarHora(+horario[1]);
+
+      setTimeout(() => {
+        this.minuto = this.formatarHora(+this.minuto - 1);
+        if(+this.minuto < 0 && +this.hora > 0) {
+          this.hora = this.formatarHora(+this.hora - 1);
+          this.minuto = '59';
+        }
+        else if(+this.minuto <= 0 && +this.hora <= 0) {
+          this.hora = '00';
+          this.minuto = '00';
+        }
+        localStorage.setItem("tempo", `${this.id},${this.hora}:${this.minuto}`);
+      }, 60000);
+    }
   }
 }

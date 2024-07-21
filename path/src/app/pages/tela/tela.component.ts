@@ -25,7 +25,7 @@ export class TelaComponent implements OnInit {
     });// Busca id
 
     window.addEventListener("storage", (event) => {
-      if (event.key === "tela") {
+      if(event.key === "tela") {
         const resultado = event.newValue?.split(",");
         this.telaService.eventosLocalStorage(resultado, this.id, this.telaUrl, this.router);
       }

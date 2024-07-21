@@ -35,19 +35,41 @@ export class RelogioComponent implements OnInit {
     this.minutos = '';
   }
 
+  configurarTempo(telas: number[] | undefined) {
+    const retorno = telas ? `${telas},${this.minutos}` : `local,${this.minutos}`;
+    setTimeout(() => {
+      localStorage.setItem("tempo", retorno);
+    }, 3000); // 3 segundos
+  }
+
   onSubmit(form: any): void {
     if (form.valid) {
-      if(form.value.telas) {
-        if(form.value.telas.includes('todas')) {
+      const telas = form.value.telas;
+      const tipo = form.value.tipo;
+
+      if(telas) {
+        if(telas.includes('todas')) {
           const numeroTelas = this.telas.map((tela: Tela) => tela.numero);
-          this.telaService.navegar(form.value.tipo, numeroTelas);
+          this.telaService.navegar(tipo, numeroTelas);
+          if(tipo == 'tempo') {
+            this.configurarTempo(numeroTelas);
+          }
         }// Se todas as telas 
-        else if(form.value.telas){
-          this.telaService.navegar(form.value.tipo, form.value.telas);
+        else if(telas){
+          this.telaService.navegar(tipo, telas);
+          if(tipo == 'tempo') {
+            this.configurarTempo(telas);
+          }
         }// Se alguma(s) tela(s)         
       }
       else {
-        this.telaService.gerarTelaEspecifica('relogio');
+        if(tipo == 'relogio') {
+          this.telaService.gerarTelaEspecifica('relogio');
+        }
+        else {
+          this.telaService.gerarTelaEspecifica('tempo');
+          this.configurarTempo(undefined);
+        }
       }// Se tela local
       this.limparForm();
     }

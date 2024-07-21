@@ -5,6 +5,7 @@ import { RelogioComponent } from './pages/casa/relogio/relogio.component';
 import { TelaComponent } from './pages/tela/tela.component';
 import { TelaRelogioComponent } from './pages/tela/tela-relogio/tela-relogio.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { TelaTempoComponent } from './pages/tela/tela-tempo/tela-tempo.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'casa', pathMatch: 'full'},
@@ -12,6 +13,7 @@ const routes: Routes = [
   {path: 'casa/relogio', component: RelogioComponent},
   {path: 'tela/:id', component: TelaComponent},
   {path: 'tela/relogio/:id', component: TelaRelogioComponent},
+  {path: 'tela/tempo/:id', component: TelaTempoComponent},
   {path: '**', component: NotFoundComponent},
 ];
 
