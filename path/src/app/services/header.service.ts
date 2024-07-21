@@ -10,19 +10,17 @@ export class HeaderService {
 
   pages: Header[] = [
     {
-      label: 'Sonoplastia',
       rota: '/casa',
       icon: 'home',
       class: 'logo'
     },
     {
-      label: 'Relógio',
       rota: '/casa/relogio',
       icon: 'timer'
     }
   ]
 
-  buscarHeader() {
+  buscarHeader(): Header[] {
     return this.pages;
   }
 }

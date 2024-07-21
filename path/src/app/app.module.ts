@@ -13,6 +13,8 @@ import { CasaComponent } from './pages/casa/casa.component';
 import { TelaRelogioComponent } from './pages/tela/tela-relogio/tela-relogio.component';
 import { RelogioComponent } from './pages/casa/relogio/relogio.component';
 import { TelaComponent } from './pages/tela/tela.component';
+import { HeaderComponent } from './templates/header/header.component';
+import { ContainerComponent } from './templates/container/container.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { TelaComponent } from './pages/tela/tela.component';
     RelogioComponent,
     TelaComponent,
     TelaRelogioComponent,
+    HeaderComponent,
+    ContainerComponent,
   ],
   imports: [
     BrowserModule,

@@ -4,10 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class IconeRotaService {
-
-  constructor() { }
-
-  iconeRota(rota: string) {
+  iconeRota(rota: string): string {
     switch(rota) {
       case 'relogio':
         return 'timer';

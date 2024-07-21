@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Header } from 'src/app/models/Header';
 import { Tela } from 'src/app/models/Tela';
-import { HeaderService } from 'src/app/services/header.service';
 import { TelaService } from 'src/app/services/tela.service';
 
 @Component({
@@ -16,17 +14,10 @@ export class RelogioComponent implements OnInit {
   minutos = '';
   telas: Tela[] = [];
 
-  constructor(
-    private telaService: TelaService,
-    private headerService: HeaderService
-  ) { }
+  constructor(private telaService: TelaService) { }
 
   ngOnInit(): void {
     this.telas = this.telaService.buscar();
-  }
-
-  buscarHeader(): Header[] {
-    return this.headerService.buscarHeader();
   }
 
   toggleTodasTelas(ativar: boolean): void {
@@ -56,7 +47,6 @@ export class RelogioComponent implements OnInit {
         }// Se uma tela         
       }
       else {
-        console.log('i');
         this.telaService.gerarTelaEspecifica('relogio');
       }// Se tela local
       this.limparForm();

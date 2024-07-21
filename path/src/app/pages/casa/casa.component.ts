@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Header } from 'src/app/models/Header';
+
 import { Tela } from 'src/app/models/Tela';
-import { HeaderService } from 'src/app/services/header.service';
 import { TelaService } from 'src/app/services/tela.service';
 
 @Component({
@@ -13,10 +12,7 @@ export class CasaComponent implements OnInit {
   telas: Tela[] = [];
   adicionarClass: string = '';
 
-  constructor(
-    private telaService: TelaService,
-    private headerService: HeaderService
-  ) {}
+  constructor(private telaService: TelaService) {}
 
   ngOnInit(): void {
     this.buscarTelas();
@@ -26,10 +22,6 @@ export class CasaComponent implements OnInit {
   configurarAdicionarClass() {
     const classe = `primeiro${this.telas.length}`;
     this.adicionarClass = classe;
-  }
-
-  buscarHeader(): Header[] {
-    return this.headerService.buscarHeader();
   }
 
   buscarTelas(): void {

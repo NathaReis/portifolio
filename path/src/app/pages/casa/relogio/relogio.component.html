@@ -1,17 +1,5 @@
-<div class="corpoEstilo">
-  <header>
-    <nav>
-      <ul>
-        <li *ngFor="let item of buscarHeader()">
-          <a routerLink="{{item.rota}}" ngClass="{{item.class}}">
-            <mat-icon>
-              {{item.icon}}
-            </mat-icon>
-          </a> 
-        </li>
-      </ul>
-    </nav>
-  </header>    
+<app-container>
+  <app-header></app-header>   
   <body>
     <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
       <mat-button-toggle-group *ngIf="telas.length > 0" class="buttonToggleBox"  name="telas" [(ngModel)]="telaSelecionada" multiple required aria-label="Font Style">
@@ -30,4 +18,4 @@
       <button class="button" type="submit" [disabled]="myForm.invalid">Enviar</button>
     </form>
   </body>
-</div>
+</app-container>

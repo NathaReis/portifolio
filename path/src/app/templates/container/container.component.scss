@@ -1,0 +1,22 @@
+div {
+    position: relative;
+    width: 100vw;
+    height: 100dvh;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+
+.padrao {
+    background: var(--background);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.tela {
+    background: var(--backgroundTela);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}

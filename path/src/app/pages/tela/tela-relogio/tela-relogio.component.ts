@@ -104,12 +104,12 @@ export class TelaRelogioComponent implements OnInit {
 
   async buscarHorario() {
     try {
-      await this.formatarInformacaoClima();
       setInterval(() => {
         const agora = new Date();
         this.hora = this.formatarHora(agora.getHours());
         this.minuto = this.formatarHora(agora.getMinutes());
       }, 1000); // 1 minuto
+      await this.formatarInformacaoClima();
       return;
     } catch (erro) {
       return erro;

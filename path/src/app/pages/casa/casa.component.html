@@ -1,33 +1,21 @@
-<div class="corpoEstilo">
-    <header>
-      <nav>
-        <ul>
-          <li *ngFor="let item of buscarHeader()">
-            <a routerLink="{{item.rota}}" ngClass="{{item.class}}">
-              <mat-icon>
-                {{item.icon}}
-              </mat-icon>
-            </a> 
-          </li>
-        </ul>
-      </nav>
-    </header>
-    <body>
-      <section>
-        <div id="adicionar" [ngClass]="adicionarClass" (click)="gerarTela()">
-          <mat-icon>add</mat-icon>
-        </div>
-        <aside *ngFor="let tela of telas">
-          <nav class="aba">
-            <h3 class="numero" (click)="voltarTela(tela)">Tela <i class="valor">{{ tela.numero }}</i></h3>
-            <div class="caixaFechar">
-              <p class="fechar" (click)="fecharTela(tela)">X</p>
-            </div>
-          </nav>
-          <div class="tela">
-            <mat-icon>{{tela.rota}}</mat-icon>
+<app-container>
+  <app-header></app-header>
+  <body>
+    <section>
+      <div id="adicionar" [ngClass]="adicionarClass" (click)="gerarTela()">
+        <mat-icon>add</mat-icon>
+      </div>
+      <aside *ngFor="let tela of telas">
+        <nav class="aba">
+          <h3 class="numero" (click)="voltarTela(tela)">Tela <i class="valor">{{ tela.numero }}</i></h3>
+          <div class="caixaFechar">
+            <p class="fechar" (click)="fecharTela(tela)">X</p>
           </div>
-        </aside>
-      </section>
-    </body>
-</div>
+        </nav>
+        <div class="tela">
+          <mat-icon>{{tela.icone}}</mat-icon>
+        </div>
+      </aside>
+    </section>
+  </body>
+</app-container>

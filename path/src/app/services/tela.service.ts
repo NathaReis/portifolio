@@ -1,7 +1,6 @@
 import { IconeRotaService } from './icone-rota.service';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-
 import { Tela } from '../models/Tela';
 
 @Injectable({
@@ -12,7 +11,7 @@ export class TelaService {
 
   constructor(readonly iconeRotaService: IconeRotaService) { }
 
-  buscar() {
+  buscar(): Tela[] {
     const sessionNumeros = sessionStorage.getItem("numeros");
     const sessionRotas = sessionStorage.getItem("rotas");
 
@@ -24,7 +23,7 @@ export class TelaService {
       for(let posicao in numeros) {
         this.listaTelas.push({
           numero: numeros[posicao],
-          rota: rotas[posicao]
+          icone: rotas[posicao]
         });
       }
 
@@ -32,36 +31,40 @@ export class TelaService {
     return this.listaTelas;
   }
 
-  fechar(tela: Tela) {
-    localStorage.setItem("tela", `${tela.numero},fechar`);
-    this.listaTelas = this.listaTelas.sort((a:Tela,b:Tela) => a.numero > b.numero ? 1 : -1);
+  ordenarLista(lista: Tela[]): Tela[] {
+    return lista.sort((a:Tela,b:Tela) => a.numero > b.numero ? 1 : -1);
+  }
 
+  excluirTelaLista(tela: Tela): Tela[] {
+    localStorage.setItem("tela", `${tela.numero},fechar`);// Envia a mensagem para tela se fechar
     let novaLista: Tela[] = this.listaTelas.filter(el => {
-        if(el.numero !== tela.numero) {
-          if(el.numero < tela.numero) {
-            return el;
-          }
-          else {
-            localStorage.setItem("tela", `${el.numero},decrementoId`);
-            el.numero--;
-            return el;
-          }
+      if(el.numero !== tela.numero) {
+        if(el.numero < tela.numero) {
+          return el;
         }
-        return
-      }
-    );
-    this.listaTelas = novaLista;
+        localStorage.setItem("tela", `${el.numero},decrementoId`);// Envia comando para decrementar id da tela
+        el.numero--;
+        return el;
+      }// Remove tela da lista
+      return
+    });
+    return novaLista;
+  }
+
+  fechar(tela: Tela): Tela[] {
+    this.listaTelas = this.ordenarLista(this.listaTelas)
+    this.listaTelas = this.excluirTelaLista(tela);
     this.registrarSessionStorage();
     return this.listaTelas;
   }
 
-  gerar() {
+  gerar(): Tela[] | boolean {
     if(this.listaTelas.length < 3) {
       const numero = this.listaTelas.length + 1;
       window.open(`../tela/${numero}`,"_blank","toolbar=yes,location=yes,directories=no, status=no, menubar=yes,scrollbars=yes, resizable=no,copyhistory=yes, width=500px,height=500px");
       const tela: Tela = {
         numero: numero,
-        rota: this.iconeRotaService.iconeRota('tela'),
+        icone: this.iconeRotaService.iconeRota('tela'),
       }
       this.listaTelas.push(tela);
       this.registrarSessionStorage();
@@ -74,11 +77,11 @@ export class TelaService {
     window.open(`../tela/${rota}/local`,"_blank","toolbar=yes,location=yes,directories=no, status=no, menubar=yes,scrollbars=yes, resizable=no,copyhistory=yes, width=500px,height=500px");
   }
 
-  navegar(rota: string, telas: string[]) {
+  navegar(rota: string, telas: string[]): void {
     telas.map((numeroTela: string) => {
       this.listaTelas.map((tela: Tela) => {
         if(tela.numero == numeroTela) {
-          tela.rota = this.iconeRotaService.iconeRota(rota);
+          tela.icone = this.iconeRotaService.iconeRota(rota);
         }
       })
       const rotaUrl = rota === 'tela' ? `tela/${numeroTela}` : `tela/${rota}/${numeroTela}`;
@@ -87,10 +90,10 @@ export class TelaService {
     this.registrarSessionStorage();
   }
 
-  registrarSessionStorage() {
+  registrarSessionStorage(): void {
     if(this.listaTelas.length > 0) {
       const numeros = this.listaTelas.map(el => el.numero);
-      const rotas = this.listaTelas.map(el => el.rota);
+      const rotas = this.listaTelas.map(el => el.icone);
 
       const numerosStr = numeros.join(",");
       const rotasStr = rotas.join(",");
@@ -103,7 +106,7 @@ export class TelaService {
     sessionStorage.removeItem("rotas");
   }
 
-  eventosLocalStorage(resultado: any, id: string, telaUrl: string, router: Router) {
+  eventosLocalStorage(resultado: any, id: string, telaUrl: string, router: Router): void {
     if(resultado[0] == id) {
       switch(resultado[1]) {
         case 'fechar':
