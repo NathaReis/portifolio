@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Tela } from 'src/app/models/Tela';
 import { TelaService } from 'src/app/services/tela.service';
+import { Tela } from 'src/app/models/Tela';
 
 @Component({
   selector: 'app-casa',
@@ -19,26 +19,26 @@ export class CasaComponent implements OnInit {
     this.configurarAdicionarClass();
   }
 
-  configurarAdicionarClass() {
-    const classe = `primeiro${this.telas.length}`;
-    this.adicionarClass = classe;
-  }
-
   buscarTelas(): void {
     this.telas = this.telaService.buscar();
   }
 
-  fecharTela(tela: Tela): void {
-    this.telas = this.telaService.fechar(tela);
+  configurarAdicionarClass(): void {
+    const classe = `primeiro${this.telas.length}`;
+    this.adicionarClass = classe;
+  }
+
+  fecharTela(numero: number): void {
+    this.telas = this.telaService.fechar(numero);
     this.configurarAdicionarClass();
   }
 
-  voltarTela(tela: Tela): void {
-    this.telaService.navegar('tela',[tela.numero]);
+  voltarTela(numero: number): void {
+    this.telaService.navegar('tela',[numero]);
   }
 
   gerarTela(): void {
-    const result: any = this.telaService.gerar();
+    const result: Tela[] | undefined = this.telaService.gerar();
     if(result) {
       this.telas = result
       this.configurarAdicionarClass();

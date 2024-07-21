@@ -8,9 +8,9 @@ import { HeaderService } from 'src/app/services/header.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-  constructor(private headerService: HeaderService) {};
+  constructor(readonly headerService: HeaderService) {};
 
-  buscarHeader(): Header[] {
-    return this.headerService.buscarHeader();
+  get header(): Header[] {
+    return this.headerService.buscarHeader;
   }
 }

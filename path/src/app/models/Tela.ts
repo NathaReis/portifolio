@@ -1,4 +1,4 @@
 export interface Tela {
-    numero: any,
+    numero: number,
     icone: string,
 }

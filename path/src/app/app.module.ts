@@ -15,6 +15,7 @@ import { RelogioComponent } from './pages/casa/relogio/relogio.component';
 import { TelaComponent } from './pages/tela/tela.component';
 import { HeaderComponent } from './templates/header/header.component';
 import { ContainerComponent } from './templates/container/container.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { ContainerComponent } from './templates/container/container.component';
     TelaRelogioComponent,
     HeaderComponent,
     ContainerComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,7 @@
-import { IconeRotaService } from './icone-rota.service';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+
+import { IconeRotaService } from './icone-rota.service';
 import { Tela } from '../models/Tela';
 
 @Injectable({
@@ -8,7 +9,8 @@ import { Tela } from '../models/Tela';
 })
 export class TelaService {
   listaTelas: Tela[] = [];
-
+  configuracaoOpenTela: string = `toolbar=yes,location=yes,directories=no, status=no, menubar=yes,scrollbars=yes, resizable=no,copyhistory=yes, width=700px,height=500px`;
+  
   constructor(readonly iconeRotaService: IconeRotaService) { }
 
   buscar(): Tela[] {
@@ -22,7 +24,7 @@ export class TelaService {
 
       for(let posicao in numeros) {
         this.listaTelas.push({
-          numero: numeros[posicao],
+          numero: +numeros[posicao],
           icone: rotas[posicao]
         });
       }
@@ -35,11 +37,11 @@ export class TelaService {
     return lista.sort((a:Tela,b:Tela) => a.numero > b.numero ? 1 : -1);
   }
 
-  excluirTelaLista(tela: Tela): Tela[] {
-    localStorage.setItem("tela", `${tela.numero},fechar`);// Envia a mensagem para tela se fechar
+  excluirTelaLista(numero: number): Tela[] {
+    this.listaTelas = this.ordenarLista(this.listaTelas)
     let novaLista: Tela[] = this.listaTelas.filter(el => {
-      if(el.numero !== tela.numero) {
-        if(el.numero < tela.numero) {
+      if(el.numero !== numero) {
+        if(el.numero < numero) {
           return el;
         }
         localStorage.setItem("tela", `${el.numero},decrementoId`);// Envia comando para decrementar id da tela
@@ -51,41 +53,42 @@ export class TelaService {
     return novaLista;
   }
 
-  fechar(tela: Tela): Tela[] {
-    this.listaTelas = this.ordenarLista(this.listaTelas)
-    this.listaTelas = this.excluirTelaLista(tela);
+  fechar(numero: number): Tela[] {
+    localStorage.setItem("tela", `${numero},fechar`);// Envia a mensagem para tela se fechar
+    this.listaTelas = this.excluirTelaLista(numero);
     this.registrarSessionStorage();
     return this.listaTelas;
   }
 
-  gerar(): Tela[] | boolean {
-    if(this.listaTelas.length < 3) {
+  gerar(): Tela[] | undefined {
+    const limiteTela = this.listaTelas.length < 3;
+    if(limiteTela) {
       const numero = this.listaTelas.length + 1;
-      window.open(`../tela/${numero}`,"_blank","toolbar=yes,location=yes,directories=no, status=no, menubar=yes,scrollbars=yes, resizable=no,copyhistory=yes, width=500px,height=500px");
-      const tela: Tela = {
+      window.open(`../tela/${numero}`,"_blank",this.configuracaoOpenTela);
+      const novaTela: Tela = {
         numero: numero,
-        icone: this.iconeRotaService.iconeRota('tela'),
+        icone: 'villa',
       }
-      this.listaTelas.push(tela);
+      this.listaTelas.push(novaTela);
       this.registrarSessionStorage();
       return this.listaTelas;
     }
-    return false;
+    return undefined;
   }
 
   gerarTelaEspecifica(rota: string) {
-    window.open(`../tela/${rota}/local`,"_blank","toolbar=yes,location=yes,directories=no, status=no, menubar=yes,scrollbars=yes, resizable=no,copyhistory=yes, width=500px,height=500px");
+    window.open(`../tela/${rota}/local`,"_blank",this.configuracaoOpenTela);
   }
 
-  navegar(rota: string, telas: string[]): void {
-    telas.map((numeroTela: string) => {
+  navegar(rota: string, numeros: number[]): void {
+    numeros.map((numero: number) => {
       this.listaTelas.map((tela: Tela) => {
-        if(tela.numero == numeroTela) {
+        if(tela.numero == numero) {
           tela.icone = this.iconeRotaService.iconeRota(rota);
         }
       })
-      const rotaUrl = rota === 'tela' ? `tela/${numeroTela}` : `tela/${rota}/${numeroTela}`;
-      localStorage.setItem("tela", `${numeroTela},${rotaUrl}`);
+      const rotaUrl = rota === 'tela' ? `tela/${numero}` : `tela/${rota}/${numero}`;
+      localStorage.setItem("tela", `${numero},${rotaUrl}`);
     })
     this.registrarSessionStorage();
   }

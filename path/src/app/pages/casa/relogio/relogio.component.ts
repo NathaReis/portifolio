@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Tela } from 'src/app/models/Tela';
+
 import { TelaService } from 'src/app/services/tela.service';
+import { Tela } from 'src/app/models/Tela';
 
 @Component({
   selector: 'app-relogio',
@@ -8,7 +9,6 @@ import { TelaService } from 'src/app/services/tela.service';
   styleUrls: ['./relogio.component.scss']
 })
 export class RelogioComponent implements OnInit {
-  meuForm: FormData = new FormData();
   telaSelecionada: string[] = [];
   tipoSelecionado = 'relogio';
   minutos = '';
@@ -39,12 +39,12 @@ export class RelogioComponent implements OnInit {
     if (form.valid) {
       if(form.value.telas) {
         if(form.value.telas.includes('todas')) {
-          const contarTelas = this.telas.map((tela: Tela) => tela.numero);
-          this.telaService.navegar(form.value.tipo, contarTelas);
+          const numeroTelas = this.telas.map((tela: Tela) => tela.numero);
+          this.telaService.navegar(form.value.tipo, numeroTelas);
         }// Se todas as telas 
         else if(form.value.telas){
           this.telaService.navegar(form.value.tipo, form.value.telas);
-        }// Se uma tela         
+        }// Se alguma(s) tela(s)         
       }
       else {
         this.telaService.gerarTelaEspecifica('relogio');

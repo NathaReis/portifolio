@@ -17,10 +17,14 @@ export class HeaderService {
     {
       rota: '/casa/relogio',
       icon: 'timer'
+    },
+    {
+      rota: '/casa/relogio',
+      icon: 'casino'
     }
   ]
 
-  buscarHeader(): Header[] {
+  get buscarHeader(): Header[] {
     return this.pages;
   }
 }

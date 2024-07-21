@@ -7,9 +7,9 @@
       </div>
       <aside *ngFor="let tela of telas">
         <nav class="aba">
-          <h3 class="numero" (click)="voltarTela(tela)">Tela <i class="valor">{{ tela.numero }}</i></h3>
+          <h3 class="numero" (click)="voltarTela(tela.numero)">Tela <i class="valor">{{ tela.numero }}</i></h3>
           <div class="caixaFechar">
-            <p class="fechar" (click)="fecharTela(tela)">X</p>
+            <p class="fechar" (click)="fecharTela(tela.numero)">X</p>
           </div>
         </nav>
         <div class="tela">
