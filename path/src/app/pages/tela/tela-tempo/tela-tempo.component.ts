@@ -46,7 +46,17 @@ export class TelaTempoComponent implements OnInit {
       }
     });// Busca localStorage
 
+    this.buscarSessionStorage();
+
     this.formatarInformacaoClima();
+  }
+
+  buscarSessionStorage(): void {
+    const storage = sessionStorage.getItem("tempo");
+    if(storage) {
+      const arrayDados = storage.split(",");
+      this.buscarHorario(arrayDados);
+    }
   }
 
   async buscarCidade() {
@@ -97,25 +107,39 @@ export class TelaTempoComponent implements OnInit {
     return hora < 10 ? `0${hora}` : `${hora}`;
   }
 
+  registrarHoraMinuto() {
+    sessionStorage.setItem("tempo", `${this.id},${this.hora}:${this.minuto}`);
+  } 
+
+  buscarHoraMinuto(resultado: any): void {
+    const posHorario = +resultado.length - 1;
+    const horario = resultado[posHorario].split(":");
+    this.hora = this.formatarHora(+horario[0]);
+    this.minuto = this.formatarHora(+horario[1]);
+    this.registrarHoraMinuto();
+  }
+
+  contagemDeMinuto(): void {
+    setTimeout(() => {
+      this.minuto = this.formatarHora(+this.minuto - 1);
+      if(+this.minuto < 0 && +this.hora > 0) {
+        this.hora = this.formatarHora(+this.hora - 1);
+        this.minuto = '59';
+      }
+      else if(+this.minuto <= 0 && +this.hora <= 0) {
+        this.hora = '00';
+        this.minuto = '00';
+      }
+      localStorage.setItem("tempo", `${this.id},${this.hora}:${this.minuto}`);
+      localStorage.removeItem("tempo");
+    }, 60000);
+  }
+
   buscarHorario(resultado: any) {
     if(resultado.includes(this.id)) {
-      const posHorario = +resultado.length - 1;
-      const horario = resultado[posHorario].split(":");
-      this.hora = this.formatarHora(+horario[0]);
-      this.minuto = this.formatarHora(+horario[1]);
-
-      setTimeout(() => {
-        this.minuto = this.formatarHora(+this.minuto - 1);
-        if(+this.minuto < 0 && +this.hora > 0) {
-          this.hora = this.formatarHora(+this.hora - 1);
-          this.minuto = '59';
-        }
-        else if(+this.minuto <= 0 && +this.hora <= 0) {
-          this.hora = '00';
-          this.minuto = '00';
-        }
-        localStorage.setItem("tempo", `${this.id},${this.hora}:${this.minuto}`);
-      }, 60000);
+      this.buscarHoraMinuto(resultado);
+      this.contagemDeMinuto();
+      localStorage.removeItem("tempo");
     }
   }
 }

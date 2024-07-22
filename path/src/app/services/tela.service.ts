@@ -15,7 +15,7 @@ export class TelaService {
 
   buscar(): Tela[] {
     const sessionNumeros = sessionStorage.getItem("numeros");
-    const sessionRotas = sessionStorage.getItem("rotas");
+    const sessionRotas = sessionStorage.getItem("icones");
 
     if(sessionNumeros && sessionRotas) {
       this.listaTelas = [];
@@ -96,17 +96,17 @@ export class TelaService {
   registrarSessionStorage(): void {
     if(this.listaTelas.length > 0) {
       const numeros = this.listaTelas.map(el => el.numero);
-      const rotas = this.listaTelas.map(el => el.icone);
+      const icones = this.listaTelas.map(el => el.icone);
 
       const numerosStr = numeros.join(",");
-      const rotasStr = rotas.join(",");
+      const iconesStr = icones.join(",");
 
       sessionStorage.setItem("numeros", numerosStr); 
-      sessionStorage.setItem("rotas", rotasStr); 
+      sessionStorage.setItem("icones", iconesStr); 
       return;
     }
     sessionStorage.removeItem("numeros");
-    sessionStorage.removeItem("rotas");
+    sessionStorage.removeItem("icones");
   }
 
   eventosLocalStorage(resultado: any, id: string, telaUrl: string, router: Router): void {

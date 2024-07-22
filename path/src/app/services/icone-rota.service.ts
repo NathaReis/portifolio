@@ -7,6 +7,8 @@ export class IconeRotaService {
   iconeRota(rota: string): string {
     switch(rota) {
       case 'relogio':
+        return 'access_time';
+      case 'tempo':
         return 'timer';
       case 'tela':
         return 'villa';

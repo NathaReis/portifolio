@@ -16,7 +16,7 @@ export class HeaderService {
     },
     {
       rota: '/casa/relogio',
-      icon: 'timer'
+      icon: 'access_time'
     },
     {
       rota: '/casa/relogio',
