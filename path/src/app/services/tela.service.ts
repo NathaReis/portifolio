@@ -93,6 +93,17 @@ export class TelaService {
     this.registrarSessionStorage();
   }
 
+  recarregar(numeros: number[] | 'local') {
+    if(numeros == 'local') {
+      localStorage.setItem("tela", `local,recarregar`);
+    }
+    else {
+      numeros.forEach((numero: number) => {
+        localStorage.setItem("tela", `${numero},recarregar`);
+      });
+    }
+  }
+
   registrarSessionStorage(): void {
     if(this.listaTelas.length > 0) {
       const numeros = this.listaTelas.map(el => el.numero);
@@ -118,6 +129,9 @@ export class TelaService {
         case 'decrementoId':
           const novoId = +id - 1;
           router.navigate([`${telaUrl}${novoId}`]);
+          break
+        case 'recarregar':
+          location.reload();
           break
         default:
           const rotaUrl = resultado[1];

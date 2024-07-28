@@ -20,6 +20,7 @@ export class TelaTempoComponent implements OnInit {
   hora: string = '00';
   minuto: string = '00';
   segundo: number = 59;
+  esperarParaContar: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -45,18 +46,8 @@ export class TelaTempoComponent implements OnInit {
           break
       }
     });// Busca localStorage
-
     this.buscarSessionStorage();
-
     this.formatarInformacaoClima();
-  }
-
-  buscarSessionStorage(): void {
-    const storage = sessionStorage.getItem("tempo");
-    if(storage) {
-      const arrayDados = storage.split(",");
-      this.buscarHorario(arrayDados);
-    }
   }
 
   async buscarCidade() {
@@ -107,39 +98,67 @@ export class TelaTempoComponent implements OnInit {
     return hora < 10 ? `0${hora}` : `${hora}`;
   }
 
-  registrarHoraMinuto() {
-    sessionStorage.setItem("tempo", `${this.id},${this.hora}:${this.minuto}`);
-  } 
+  resetarTempo(): void {
+    this.hora = '00';
+    this.minuto = '00';
+  }
+
+  pausarContagemTemporariamente(tempo: number): void {
+    tempo += 100;
+    this.esperarParaContar = true;
+    setTimeout(() => {
+      this.esperarParaContar = false;
+      this.contagemDeMinuto();
+    }, tempo);
+  }
 
   buscarHoraMinuto(resultado: any): void {
     const posHorario = +resultado.length - 1;
     const horario = resultado[posHorario].split(":");
     this.hora = this.formatarHora(+horario[0]);
     this.minuto = this.formatarHora(+horario[1]);
-    this.registrarHoraMinuto();
   }
 
   contagemDeMinuto(): void {
-    setTimeout(() => {
-      this.minuto = this.formatarHora(+this.minuto - 1);
-      if(+this.minuto < 0 && +this.hora > 0) {
-        this.hora = this.formatarHora(+this.hora - 1);
-        this.minuto = '59';
-      }
-      else if(+this.minuto <= 0 && +this.hora <= 0) {
-        this.hora = '00';
-        this.minuto = '00';
-      }
-      localStorage.setItem("tempo", `${this.id},${this.hora}:${this.minuto}`);
-      localStorage.removeItem("tempo");
-    }, 60000);
+    if(!this.esperarParaContar) {
+      const diminuirMinuto = +this.minuto > 0;
+      const diminuirHora = +this.hora > 0;
+      sessionStorage.setItem(`tempo${this.id}`, `${this.id},${this.hora}:${this.minuto}`);
+      
+      setTimeout(() => {
+        if(diminuirMinuto || diminuirHora) {
+          if(diminuirMinuto) {
+            this.minuto = this.formatarHora(+this.minuto - 1);
+          }
+          else if(diminuirHora) {
+            this.hora = this.formatarHora(+this.hora - 1);
+            this.minuto = '59';
+          }
+          this.contagemDeMinuto();
+        }
+        else {
+          this.hora = '00';
+          this.minuto = '00';
+          sessionStorage.removeItem(`tempo${this.id}`);
+        }
+      }, 60000);
+    }
   }
 
   buscarHorario(resultado: any) {
     if(resultado.includes(this.id)) {
       this.buscarHoraMinuto(resultado);
-      this.contagemDeMinuto();
-      localStorage.removeItem("tempo");
+      
+      const storage = sessionStorage.getItem(`tempo${this.id}`);
+      storage ? this.pausarContagemTemporariamente(60000) : this.contagemDeMinuto();
+    }
+  }
+
+  buscarSessionStorage(): void {
+    const storage = sessionStorage.getItem(`tempo${this.id}`);
+    if(storage) {
+      const arrayDados = storage.split(",");
+      this.buscarHorario(arrayDados);
     }
   }
 }

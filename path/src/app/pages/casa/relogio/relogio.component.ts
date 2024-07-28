@@ -21,12 +21,7 @@ export class RelogioComponent implements OnInit {
   }
 
   toggleTodasTelas(ativar: boolean): void {
-    if(ativar) {
-      this.telaSelecionada = ['todas'];
-    }
-    else {
-      this.telaSelecionada = this.telaSelecionada.filter((tela: string) => tela !== 'todas');
-    }
+    ativar ? this.telaSelecionada = ['todas'] : this.telaSelecionada = this.telaSelecionada.filter((tela: string) => tela !== 'todas');
   }
 
   limparForm(): void {
@@ -35,43 +30,42 @@ export class RelogioComponent implements OnInit {
     this.minutos = '';
   }
 
-  configurarTempo(telas: number[] | undefined) {
+  configurarTempo(telas?: number[]) {
     const retorno = telas ? `${telas},${this.minutos}` : `local,${this.minutos}`;
+    if(telas) {
+      this.telaService.recarregar(telas);
+    }
+    else {
+      this.telaService.recarregar('local');
+    }
     setTimeout(() => {
       localStorage.setItem("tempo", retorno);
     }, 3000); // 3 segundos
   }
 
   onSubmit(form: any): void {
-    if (form.valid) {
-      const telas = form.value.telas;
-      const tipo = form.value.tipo;
+    let telas: number[] | 'todas' = form.value.telas;
+    const tipo: string = form.value.tipo;
 
-      if(telas) {
-        if(telas.includes('todas')) {
-          const numeroTelas = this.telas.map((tela: Tela) => tela.numero);
-          this.telaService.navegar(tipo, numeroTelas);
-          if(tipo == 'tempo') {
-            this.configurarTempo(numeroTelas);
-          }
-        }// Se todas as telas 
-        else if(telas){
-          this.telaService.navegar(tipo, telas);
-          if(tipo == 'tempo') {
-            this.configurarTempo(telas);
-          }
-        }// Se alguma(s) tela(s)         
-      }
+    if(telas) {
+      if(telas == 'todas') {
+        telas = this.telas.map((tela: Tela) => tela.numero);
+        this.telaService.navegar(tipo, telas);
+      }// Se todas as telas 
       else {
-        if(tipo == 'relogio') {
-          this.telaService.gerarTelaEspecifica('relogio');
-        }
-        else {
-          this.telaService.gerarTelaEspecifica('tempo');
-          this.configurarTempo(undefined);
-        }
-      }// Se tela local
-      this.limparForm();
+        this.telaService.navegar(tipo, telas);
+      }// Se alguma(s) tela(s) 
+
+      if(tipo == 'tempo') {
+        this.configurarTempo(telas);
+      }    
     }
+    else {
+      this.telaService.gerarTelaEspecifica(tipo);
+      if(tipo == 'tempo') {
+        this.configurarTempo();
+      }   
+    }// Se tela local
+    this.limparForm();
   }
 }

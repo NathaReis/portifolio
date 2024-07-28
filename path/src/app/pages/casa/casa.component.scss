@@ -1,15 +1,13 @@
 section {
     position: absolute;
-    width: 750px;
-    height: 170px;
     bottom: 50px;
     left: 50px;
+    height: 170px;
     background: #0003;
     border-radius: 20px;
     backdrop-filter: blur(5px);
     box-shadow: 0 0 10px #0005, 0 0 10px #0006;
     display: flex;
-    align-items: center;
 }
 
 section #adicionar {
@@ -27,7 +25,7 @@ section #adicionar {
 }
 
 section .primeiro0 {
-    left: 15px;
+    left: 0;
 }
 
 section .primeiro1 {
@@ -36,10 +34,6 @@ section .primeiro1 {
 
 section .primeiro2 {
     left: 525px;
-}
-
-section .primeiro3 {
-    display: none;
 }
 
 section #adicionar:hover {
