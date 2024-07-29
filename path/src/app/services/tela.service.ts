@@ -9,7 +9,7 @@ import { Tela } from '../models/Tela';
 })
 export class TelaService {
   listaTelas: Tela[] = [];
-  configuracaoOpenTela: string = `toolbar=yes,location=yes,directories=no, status=no, menubar=yes,scrollbars=yes, resizable=no,copyhistory=yes, width=700px,height=500px`;
+  configuracaoOpenTela: string = `toolbar=yes,location=yes,directories=no, status=no, menubar=yes,scrollbars=yes, resizable=no,copyhistory=yes, width=500px,height=200px`;
   
   constructor(readonly iconeRotaService: IconeRotaService) { }
 

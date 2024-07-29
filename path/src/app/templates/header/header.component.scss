@@ -5,10 +5,10 @@ header ul {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: transparent;
-    backdrop-filter: blur(5px);
     list-style: none;
     font-size: 1.2rem;
+    background: #492d49;
+    box-shadow: 0 0 10px #000000c2;
 }
 
 header a {
@@ -28,20 +28,13 @@ header a {
     cursor: pointer;
 }
 header a:hover {
-    background: var(--background);
-    background-attachment: fixed;
-    background-size: 100vw;
-    background-position: center;
+    background: #0d0d0d;
 }
 
 header .logo {
     position: absolute;
     top: 0px;
     left: 0px;
-    padding: 0 40px 0 30px;
+    padding: 0 70px 0 30px;
     border-radius: 0 35px 35px 0;
-}
-
-header .logo:hover {
-    border-right: .8px solid #0d0d0d;
 }
