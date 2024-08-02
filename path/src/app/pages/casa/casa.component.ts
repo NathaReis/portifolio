@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { TelaService } from 'src/app/services/tela.service';
 import { Tela } from 'src/app/models/Tela';
+import { TemaService } from 'src/app/services/tema.service';
 
 @Component({
   selector: 'app-casa',
@@ -11,12 +12,19 @@ import { Tela } from 'src/app/models/Tela';
 export class CasaComponent implements OnInit {
   telas: Tela[] = [];
   adicionarClass: string = '';
+  tema: string = '';
 
-  constructor(private telaService: TelaService) {}
+  constructor(
+    private telaService: TelaService,
+    private temaService: TemaService
+  ) {}
 
   ngOnInit(): void {
     this.buscarTelas();
     this.configurarAdicionarClass();
+    const temaSalvo = localStorage.getItem('tema') || 'claro';
+    this.tema = temaSalvo;
+    this.temaService.configTema(temaSalvo);
   }
 
   buscarTelas(): void {
@@ -46,5 +54,9 @@ export class CasaComponent implements OnInit {
     else {
       alert("Limite de telas alcançado!");
     }
+  }
+
+  configurarTema() {
+    this.temaService.configTema(this.tema);
   }
 }

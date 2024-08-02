@@ -7,7 +7,7 @@ header ul {
     align-items: center;
     list-style: none;
     font-size: 1.2rem;
-    background: #492d49;
+    background: var(--color5);
     box-shadow: 0 0 10px #000000c2;
 }
 
@@ -19,7 +19,8 @@ header a {
     justify-content: center;
     align-items: center;
     text-decoration: none;
-    color: #fff;
+    color: var(--color1);
+    text-shadow: 0 0 10px #00000042;
     font-family: "Poppins", Arial, Helvetica, sans-serif;
     font-style: normal;
     font-weight: 100;
@@ -28,7 +29,7 @@ header a {
     cursor: pointer;
 }
 header a:hover {
-    background: #0d0d0d;
+    background: var(--color2);
 }
 
 header .logo {
