@@ -16,11 +16,14 @@
           <mat-icon>{{tela.icone}}</mat-icon>
         </div>
       </aside>
-      <mat-radio-group [(ngModel)]="tema" name="tema" aria-label="Selecione um tema" (change)="configurarTema()">
-        <mat-radio-button value="claro">Claro</mat-radio-button>
-        <mat-radio-button value="escuro">Escuro</mat-radio-button>
-        <mat-radio-button value="classicAzul">Azul</mat-radio-button>
-        <mat-radio-button value="classicRosa">Rosa</mat-radio-button>
+      <mat-radio-group 
+        [(ngModel)]="tema" name="tema" id="temas" 
+        (change)="configurarTema()" 
+        color="primary">
+          <mat-radio-button value="claro">Claro</mat-radio-button>
+          <mat-radio-button value="escuro">Escuro</mat-radio-button>
+          <mat-radio-button value="classicAzul">Azul</mat-radio-button>
+          <mat-radio-button value="classicRosa">Rosa</mat-radio-button>
       </mat-radio-group>      
     </section>
   </body>
