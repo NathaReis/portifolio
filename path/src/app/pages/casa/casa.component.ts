@@ -22,9 +22,6 @@ export class CasaComponent implements OnInit {
   ngOnInit(): void {
     this.buscarTelas();
     this.configurarAdicionarClass();
-    const temaSalvo = localStorage.getItem('tema') || 'claro';
-    this.tema = temaSalvo;
-    this.temaService.configTema(temaSalvo);
   }
 
   buscarTelas(): void {

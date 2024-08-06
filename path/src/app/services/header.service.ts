@@ -19,7 +19,7 @@ export class HeaderService {
       icon: 'access_time'
     },
     {
-      rota: '/casa/relogio',
+      rota: '/casa/sorteio',
       icon: 'casino'
     }
   ]
