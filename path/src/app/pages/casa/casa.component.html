@@ -2,7 +2,7 @@
   <app-header></app-header>
   <body>
     <section>
-      <div id="adicionar" [ngClass]="adicionarClass" (click)="gerarTela()">
+      <div id="adicionar" (click)="gerarTela()">
         <mat-icon>add</mat-icon>
       </div>
       <aside *ngFor="let tela of telas">

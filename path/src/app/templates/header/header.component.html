@@ -2,10 +2,11 @@
     <nav>
       <ul>
         <li *ngFor="let item of header">
-          <a routerLink="{{item.rota}}" ngClass="{{item.class}}">
+          <a routerLink="{{ item.rota }}" ngClass="{{ item.class }}">
             <mat-icon>
-              {{item.icon}}
+              {{ item.icon }}
             </mat-icon>
+            {{ item.nome }}
           </a> 
         </li>
       </ul>

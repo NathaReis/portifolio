@@ -12,15 +12,18 @@ export class HeaderService {
     {
       rota: '/casa',
       icon: 'home',
-      class: 'logo'
+      class: 'logo',
+      nome: 'Casa'
     },
     {
       rota: '/casa/relogio',
-      icon: 'access_time'
+      icon: 'access_time',
+      nome: 'tempo'
     },
     {
       rota: '/casa/relogio',
-      icon: 'casino'
+      icon: 'casino',
+      nome: 'sorteio'
     }
   ]
 

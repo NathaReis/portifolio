@@ -11,7 +11,6 @@ import { TemaService } from 'src/app/services/tema.service';
 })
 export class CasaComponent implements OnInit {
   telas: Tela[] = [];
-  adicionarClass: string = '';
   tema: string = '';
 
   constructor(
@@ -21,7 +20,6 @@ export class CasaComponent implements OnInit {
 
   ngOnInit(): void {
     this.buscarTelas();
-    this.configurarAdicionarClass();
     const temaSalvo = localStorage.getItem('tema') || 'claro';
     this.tema = temaSalvo;
     this.temaService.configTema(temaSalvo);
@@ -31,14 +29,8 @@ export class CasaComponent implements OnInit {
     this.telas = this.telaService.buscar();
   }
 
-  configurarAdicionarClass(): void {
-    const classe = `primeiro${this.telas.length}`;
-    this.adicionarClass = classe;
-  }
-
   fecharTela(numero: number): void {
     this.telas = this.telaService.fechar(numero);
-    this.configurarAdicionarClass();
   }
 
   voltarTela(numero: number): void {
@@ -49,7 +41,6 @@ export class CasaComponent implements OnInit {
     const result: Tela[] | undefined = this.telaService.gerar();
     if(result) {
       this.telas = result
-      this.configurarAdicionarClass();
     }
     else {
       alert("Limite de telas alcançado!");

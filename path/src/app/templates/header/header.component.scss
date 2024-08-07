@@ -23,10 +23,11 @@ header a {
     text-shadow: 0 0 10px #00000042;
     font-family: "Poppins", Arial, Helvetica, sans-serif;
     font-style: normal;
-    font-weight: 100;
-    letter-spacing: 1px;
+    font-weight: 500;
+    letter-spacing: 4px;
     transition: .5s;
     cursor: pointer;
+    gap: 10px;
 }
 header a:hover {
     background: var(--color2);

@@ -11,30 +11,20 @@ section {
     display: flex;
 }
 
+
 section #adicionar {
     position: absolute;
     top: -40px;
+    right: -35px;
     width: 30px;
     height: 30px;
-    cursor: pointer;
+
     display: grid;
     place-items: center;
     border-radius: 5px 15px 0 0;
     background: #eee;
     box-shadow: 0 5px 5px #00000052;
-    transition: .3s;
-}
-
-section #adicionar.primeiro0 {
-    left: 15px;
-}
-
-section #adicionar.primeiro1 {
-    left: 265px;
-}
-
-section #adicionar.primeiro2 {
-    left: 525px;
+    cursor: pointer;
 }
 
 section #adicionar:hover {
@@ -43,14 +33,14 @@ section #adicionar:hover {
 
 section #temas {
     position: absolute;
-    width: 100px;
+    top: 0;
+    right: -35px;
+    width: 30px;
     height: 170px;
+
     display: grid;
     align-items: center;
     justify-content: left;
-    right: -100px;
-    top: 0;
-    transition: .3s;
 }
 
 section aside {
