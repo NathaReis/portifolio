@@ -21,9 +21,9 @@ export class HeaderService {
       nome: 'tempo'
     },
     {
-      rota: '/casa/relogio',
-      icon: 'casino',
-      nome: 'sorteio'
+      nome: 'sorteio',
+      rota: '/casa/sorteio',
+      icon: 'casino'
     }
   ]
 

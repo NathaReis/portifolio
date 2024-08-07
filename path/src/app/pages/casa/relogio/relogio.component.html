@@ -1,5 +1,5 @@
-<app-container>
-  <app-header></app-header>   
+<path-container>
+  <path-header></path-header>   
   <body>
     <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
       <mat-button-toggle-group *ngIf="telas.length > 0" 
@@ -22,4 +22,4 @@
       <button class="button" type="submit" [disabled]="myForm.invalid">Enviar</button>
     </form>
   </body>
-</app-container>
+</path-container>
