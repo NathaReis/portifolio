@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
-import { TelaService } from 'src/app/services/tela.service';
 import { Cidade } from 'src/app/models/Cidade';
 import { Clima } from 'src/app/models/Clima';
 
@@ -12,7 +11,6 @@ import { Clima } from 'src/app/models/Clima';
 })
 export class TelaTempoComponent implements OnInit {
   id: string = '';
-  telaUrl: string = '';
 
   nomeCidade = 'Sete Lagoas';
   chaveApi = 'af771379a3ebcb50459501b069cdebc8';
@@ -22,30 +20,19 @@ export class TelaTempoComponent implements OnInit {
   segundo: number = 59;
   esperarParaContar: boolean = false;
 
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private telaService: TelaService
-  ) { }
+  constructor(private route: ActivatedRoute,) { }
 
   ngOnInit(): void {
-    this.telaUrl = this.router.url.slice(0,-1);
-
     this.route.params.subscribe((params: any) => {
       this.id = String(params["id"]);
     });// Busca id
 
-    window.addEventListener("storage", (event) => {
+    window.onstorage = (event) => {
       const resultado = event.newValue?.split(",");
-      switch(event.key) {
-        case 'tela':
-          this.telaService.eventosLocalStorage(resultado, this.id, this.telaUrl, this.router);
-          break 
-        case 'tempo':
-          this.buscarHorario(resultado);
-          break
+      if(event.key == 'tempo') {
+        this.buscarHorario(resultado);
       }
-    });// Busca localStorage
+    };// Busca localStorage
     this.buscarSessionStorage();
     this.formatarInformacaoClima();
   }
